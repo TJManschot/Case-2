@@ -1,5 +1,6 @@
 package nl.belastingdienst.model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +12,11 @@ public class Gebruiker {
     long id;
     String gebruikersnaam;
     String wachtwoord;
+    String email;
+    @Embedded
+    Adres adres;
+    boolean akkoordMetVoorwaarden;
+
 
     public Gebruiker() { }
     public Gebruiker(String gebruikersnaam, String wachtwoord) {
