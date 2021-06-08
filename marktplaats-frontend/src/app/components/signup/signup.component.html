@@ -46,13 +46,11 @@
 </form>
 
 <div *ngFor="let gebruiker of gebruikers">
-  {{gebruiker.voornaam}}
-  {{gebruiker.achternaam}}
+  {{gebruiker.gebruikersnaam}}
   {{gebruiker.adres.straat}}
   {{gebruiker.adres.huisnummer}}
-  {{gebruiker.adres.postcode.cijfers + gebruiker.adres.postcode.letters}}
+  {{gebruiker.adres.postcode}}
   {{gebruiker.adres.stad}}
-  {{gebruiker.adres.provincie}}
   {{gebruiker.wachtwoord}}
   {{gebruiker.email}}
   <!--  {{gebruiker.akkoordMetVoorwaarde}}-->

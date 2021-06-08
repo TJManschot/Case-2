@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Gebruiker} from "../models/gebruiker";
 import {Adres} from "../models/adres";
-import {Postcode} from "../models/postcode";
 import {Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
@@ -25,25 +24,18 @@ export class GebruikerService {
   //   return this.gebruikerSubject;
   // }
 
-  postcode: Postcode = {
-    cijfers: 1112,
-    letters: "WZ"
-  }
-
   adres: Adres = {
     straat: "Kees van Dongenpad",
-    huisnummer: 59,
-    postcode: this.postcode,
-    stad: "Diemen",
-    provincie: "Noord-Holland"
+    huisnummer: "59",
+    postcode: "1112WZ",
+    stad: "Diemen"
   };
 
 
   private gebruikers: Gebruiker[] = [
     {
       id: 0,
-      voornaam: "Jay",
-      achternaam: "Richardson",
+      gebruikersnaam: "Richardson",
       email: "jay.richardson@outlook.com",
       wachtwoord: "Wachtwoord",
       adres: this.adres

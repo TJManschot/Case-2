@@ -1,9 +1,7 @@
-import {Postcode} from "./postcode";
 
 export interface Adres {
   straat: string;
-  huisnummer: number;
-  postcode: Postcode;
+  huisnummer: string;
+  postcode: string;
   stad: string;
-  provincie: string;
 }

@@ -2,11 +2,10 @@ import {Adres} from "./adres";
 
 export interface Gebruiker {
   id: number;
-  voornaam: string;
-  achternaam: string;
+  gebruikersnaam: string;
   email: string;
   wachtwoord: string;
-  akkoordMetVoorwaarde?: boolean;
+  akkoordMetVoorwaarden?: boolean;
   adres: Adres;
 
   // bezorgwijze: Bezorgwijze[];
