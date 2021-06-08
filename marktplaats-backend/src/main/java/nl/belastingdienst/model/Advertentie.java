@@ -1,5 +1,6 @@
 package nl.belastingdienst.model;
 
+
 import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 
