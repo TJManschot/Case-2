@@ -6,8 +6,10 @@ import nl.belastingdienst.model.Gebruiker;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import java.util.List;
 
+@Path("gebruikers")
 public class GebruikersResource implements JsonResource {
 
     @Inject
