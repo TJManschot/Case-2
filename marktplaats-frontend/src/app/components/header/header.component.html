@@ -1,0 +1,31 @@
+<header>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+</header>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">
+    <i class="bi bi-house"></i>
+  </a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a [routerLink]="['/advertenties']" class="nav-link"><i class="bi bi-collection"></i>
+          Advertenties</a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul class="navbar-nav mr-auto padding-right">
+      <!--      <a class="nav-link" [routerLink]="['/winkelwagen']"><i class="bi bi-cart"></i>-->
+      <!--        Winkelwagen</a>-->
+      <a>
+        <div *ngIf="loggedIn; else elseBlock" class="dropdown">
+          <app-user-profile></app-user-profile>
+        </div>
+        <ng-template #elseBlock>
+          <app-login></app-login>
+        </ng-template>
+      </a>
+    </ul>
+  </div>
+</nav>
+

@@ -1,0 +1,38 @@
+<div class="col">
+  <div class="col dropdown">
+    <ul class="navbar-nav mr-auto dropdown">
+      <li class="nav-item" display="dynamic" ngbDropdown placement="bottom-right">
+        <a class="nav-link" id="navbarDropdown3" ngbDropdownToggle role="button" tabindex="0">
+          <i class="bi bi-person-circle"></i>
+          Inloggen
+        </a>
+        <div aria-labelledby="dropdownForm1" ngbDropdownMenu>
+          <form class="px-4 py-3">
+            <div class="form-group">
+              <label for="exampleDropdownFormEmail1">Email-adres</label>
+              <input autocomplete="username" class="form-control" id="exampleDropdownFormEmail1"
+                     placeholder="Email"
+                     type="email">
+            </div>
+            <div class="form-group">
+              <label for="exampleDropdownFormPassword1">Wachtwoord</label>
+              <input autocomplete="current-password" class="form-control" id="exampleDropdownFormPassword1"
+                     placeholder="*******"
+                     type="password">
+            </div>
+
+            <button class="btn btn-primary" type="submit">Log in</button>
+
+          </form>
+          <div class="dropdown-divider"></div>
+          <button [routerLink]="['/singup']" ngbDropdownItem>Registreren</button>
+
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
