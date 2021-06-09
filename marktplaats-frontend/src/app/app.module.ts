@@ -9,13 +9,14 @@ import {AdvertentieComponent} from './components/advertentie/advertentie.compone
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LoginComponent} from './components/login/login.component';
 import {AdvertentiePagina} from './pages/advertentie-pagina/advertentie.pagina';
-import {RouterModule} from "@angular/router";
-import {routes} from "./app-routes";
+import {RouterModule} from '@angular/router';
+import {routes} from './app-routes';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {NewUserPagina} from './pages/new-user-pagina/new-user.pagina';
 import {SignupComponent} from './components/registreren/registreren.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdresVragenComponent} from './components/adres-vragen/adres-vragen.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {AdresVragenComponent} from './components/adres-vragen/adres-vragen.compo
     NgbModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

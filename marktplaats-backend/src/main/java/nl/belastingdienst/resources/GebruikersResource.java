@@ -25,4 +25,12 @@ public class GebruikersResource implements JsonResource {
         gebruikerDao.add(gebruiker);
         return gebruiker;
     }
+
+    @POST @Path("login")
+    public void login(Gebruiker gebruiker) {
+        String gebruikersnaam = gebruiker.getGebruikersnaam();
+        String wachtwoord = gebruiker.getWachtwoord();
+
+        System.out.println(gebruikersnaam + " " + wachtwoord);
+    }
 }
