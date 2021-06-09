@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Gebruiker} from "../models/gebruiker";
 import {Adres} from "../models/adres";
-import {Observable, Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {Bezorgwijzen} from "../models/bezorgwijzen";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +37,8 @@ export class GebruikerService {
       gebruikersnaam: "Richardson",
       email: "jay.richardson@outlook.com",
       wachtwoord: "Wachtwoord",
-      adres: this.adres
+      adres: this.adres,
+      bezorgwijze: [Bezorgwijzen.MAGAZIJN.toString(), Bezorgwijzen.VERSTUREN.toString()]
     }
   ];
 

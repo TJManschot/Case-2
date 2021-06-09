@@ -1,4 +1,5 @@
 import {Adres} from './adres';
+import {Bezorgwijzen} from './bezorgwijzen';
 
 export interface Gebruiker {
   id: number;
@@ -7,6 +8,5 @@ export interface Gebruiker {
   wachtwoord: string;
   akkoordMetVoorwaarden?: boolean;
   adres: Adres;
-
-  // bezorgwijze: Bezorgwijze[];
+  bezorgwijze: string[];
 }

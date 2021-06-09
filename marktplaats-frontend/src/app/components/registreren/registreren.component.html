@@ -12,33 +12,48 @@
     <!--      TODO validators-->
   </div>
 
-  <div class="form-group" id="bezorgwijze[]">
-    <label class="custom-control-label margin-top" for="bezorgwijze[]">Bezorgwijze</label>
-    <div class="custom-control custom-checkbox">
-      <input class="custom-control-input" id="afhalenMagazijn" type="checkbox">
-      <label class="custom-control-label" for="afhalenMagazijn">Afhalen magazijn</label>
-    </div>
-
-    <div class="custom-control custom-checkbox">
-      <input (change)="updateState()" class="custom-control-input" id="thuisAfhalen" type="checkbox">
-      <label class="custom-control-label" for="thuisAfhalen">Thuis afhalen</label>
-      <div *ngIf="thuisAfhalen" formGroupName="adres">
+  <div *ngFor="let bezorgwijze of bezorgwijzen; let i = index">
+    <label formArrayName="bezorgwijzen">
+      <input *ngIf="bezorgwijzen[i] !=='Ophalen'" type="checkbox" [formControlName]="i" />
+      <input *ngIf="bezorgwijzen[i] ==='Ophalen'" (change)="updateState()" type="checkbox" [formControlName]="i" />
+      {{bezorgwijzen[i]}}
+      <div *ngIf="bezorgwijzen[i] ==='Ophalen' && thuisAfhalen">
         <app-adres-vragen [adres]="gebruikerForm.get('adres')"></app-adres-vragen>
       </div>
-    </div>
-
-    <div class="custom-control custom-checkbox">
-      <input class="custom-control-input" id="versturen" type="checkbox">
-      <label class="custom-control-label" for="versturen">Versturen</label>
-    </div>
-
-    <div class="custom-control custom-checkbox">
-      <input class="custom-control-input" id="versturenOnderRembours" type="checkbox">
-      <label class="custom-control-label" for="versturenOnderRembours">Versturen onder rembours</label>
-    </div>
+    </label>
   </div>
-  <button class="btn btn-primary margin-top" type="submit">Aanmelden</button>
-</form>
+  <div *ngIf="!gebruikerForm.valid">At least one order must be selected</div>
+    <button class="btn btn-primary margin-top" type="submit">Aanmelden</button>
+  </form>
+
+
+<!--  <div class="form-group" id="bezorgwijze[]">-->
+<!--    <label class="custom-control-label margin-top" for="bezorgwijze[]">Bezorgwijze</label>-->
+<!--    <div class="custom-control custom-checkbox">-->
+<!--      <input type="checkbox" [value]="Bezorgwijzen.MAGAZIJN" formControlName="bezorgwijzen" [checked]="onCheckboxChange(0)" >-->
+<!--      <label class="custom-control-label" >Afhalen magazijn</label>-->
+<!--    </div>-->
+
+<!--    <div class="custom-control custom-checkbox">-->
+<!--      <input (change)="updateState()" class="custom-control-input" id="thuisAfhalen" type="checkbox">-->
+<!--      <label class="custom-control-label" for="thuisAfhalen">Thuis afhalen</label>-->
+<!--      <div *ngIf="thuisAfhalen" formGroupName="adres">-->
+<!--        <app-adres-vragen [adres]="gebruikerForm.get('adres')"></app-adres-vragen>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="custom-control custom-checkbox">-->
+<!--      <input class="custom-control-input" id="versturen" type="checkbox" >-->
+<!--      <label class="custom-control-label" for="versturen">Versturen</label>-->
+<!--    </div>-->
+
+<!--    <div class="custom-control custom-checkbox">-->
+<!--      <input class="custom-control-input" id="versturenOnderRembours" type="checkbox">-->
+<!--      <label class="custom-control-label" for="versturenOnderRembours">Versturen onder rembours</label>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <button class="btn btn-primary margin-top" type="submit">Aanmelden</button>-->
+<!--</form>-->
 
 <div *ngFor="let gebruiker of gebruikers">
   {{gebruiker | json}}
