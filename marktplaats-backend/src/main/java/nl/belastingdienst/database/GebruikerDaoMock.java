@@ -22,6 +22,19 @@ public class GebruikerDaoMock implements GebruikerDao {
     }
 
     @Override
+    public List<Gebruiker> getByGebruikersnaam(String gebruikersnaam) {
+        List<Gebruiker> result = new ArrayList<>();
+
+        for(Gebruiker gebruiker: gebruikers) {
+            if (gebruikersnaam.equals(gebruiker.getGebruikersnaam())) {
+                result.add(gebruiker);
+            }
+        }
+
+        return result;
+    }
+
+    @Override
     public void add(Gebruiker gebruiker) {
         gebruikers.add(gebruiker);
     }

@@ -21,6 +21,13 @@ public class GebruikerDaoImpl implements GebruikerDao {
     }
 
     @Override
+    public List<Gebruiker> getByGebruikersnaam(String gebruikersnaam) {
+        return em.createQuery("SELECT g FROM Gebruiker g WHERE g.gebruikersnaam =:input", Gebruiker.class)
+                .setParameter("input", gebruikersnaam)
+                .getResultList();
+    }
+
+    @Override
     public void add(Gebruiker gebruiker) {
         em.persist(gebruiker);
     }

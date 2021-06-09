@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface GebruikerDao {
     List<Gebruiker> get();
+    List<Gebruiker> getByGebruikersnaam(String gebruikersnaam);
     void add(Gebruiker gebruiker);
 }

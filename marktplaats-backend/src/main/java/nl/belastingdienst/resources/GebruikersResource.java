@@ -27,10 +27,14 @@ public class GebruikersResource implements JsonResource {
     }
 
     @POST @Path("login")
-    public void login(Gebruiker gebruiker) {
-        String gebruikersnaam = gebruiker.getGebruikersnaam();
-        String wachtwoord = gebruiker.getWachtwoord();
+    public void login(Gebruiker input) {
+        String gebruikersnaam = input.getGebruikersnaam();
+        String wachtwoord = input.getWachtwoord();
 
         System.out.println(gebruikersnaam + " " + wachtwoord);
+        List<Gebruiker> resultaat = gebruikerDao.getByGebruikersnaam(gebruikersnaam);
+        if (resultaat.size() == 1) {
+            System.out.println(resultaat.get(0).getWachtwoord());
+        }
     }
 }
