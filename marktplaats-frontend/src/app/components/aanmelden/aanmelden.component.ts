@@ -1,34 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Gebruiker} from "../../models/gebruiker";
-import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ControlContainer,
+  FormControl,
+  FormArray
+} from '@angular/forms';
 import {GebruikerService} from "../../services/gebruiker.service";
+import {AdresVragenComponent} from "../adres-vragen/adres-vragen.component";
+import {newArray} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  templateUrl: './aanmelden.component.html',
+  styleUrls: ['./aanmelden.component.css']
 })
 export class SignupComponent implements OnInit {
-
   gebruikers: Gebruiker[] = [];
 
   thuisAfhalen: boolean = false;
-  nieuweGebruiker = {} as Gebruiker;
-  toevoegenGebruikerForm!: FormGroup;
-
+  // @ts-ignore
+  public toevoegenGebruikerForm: formGroup;
   constructor(
     private fb: FormBuilder,
     private gebruikerService: GebruikerService
   ) {
   }
 
-  // ngOnInit(): void {
-  //   this.gebruikers = this.gebruikerService.getGebruikers();
-  // }
 
   ngOnInit(): void {
     this.gebruikers = this.gebruikerService.getGebruikers();
+    this.maakGebruikersFormulier();
 
+  }
+
+  public maakGebruikersFormulier (): void{
     this.toevoegenGebruikerForm = this.fb.group({
       gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
       email: ['', [Validators.required, emailValidator]],
@@ -39,6 +48,7 @@ export class SignupComponent implements OnInit {
         stad: ['']
       })
     });
+
   }
 
   updateState() {
@@ -47,6 +57,7 @@ export class SignupComponent implements OnInit {
 
   addGebruiker() {
     this.gebruikerService.addGebruiker(this.toevoegenGebruikerForm.value);
+    console.log(this.toevoegenGebruikerForm.value);
   }
 }
 
@@ -58,15 +69,3 @@ function emailValidator(control: AbstractControl) {
   const regex = /^.+@.+\.[a-zA-Z]+$/;
   return regex.test(control.value) ? null : {email: {valid: false}};
 }
-
-
-//
-//   addContact(form: NgForm) {
-//     this.gebruikerService.addGebruiker(this.toevoegenGebruikerForm.value);
-//     this.nieuweGebruiker = this.toevoegenGebruikerForm.value;
-//     // this.nieuweGebruiker = {} as Gebruiker;
-//     form.reset();
-//   }
-//
-//
-//

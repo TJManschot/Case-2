@@ -23,7 +23,7 @@
       <input (change)="updateState()" class="custom-control-input" id="thuisAfhalen" type="checkbox">
       <label class="custom-control-label" for="thuisAfhalen">Thuis afhalen</label>
       <div *ngIf="thuisAfhalen" formGroupName="adres">
-        <app-adres-vragen></app-adres-vragen>
+        <app-adres-vragen [adres]="toevoegenGebruikerForm.get('adres')"></app-adres-vragen>
       </div>
     </div>
 
@@ -41,14 +41,7 @@
 </form>
 
 <div *ngFor="let gebruiker of gebruikers">
-  {{gebruiker.gebruikersnaam}}
-  {{gebruiker.adres.straat}}
-  {{gebruiker.adres.huisnummer}}
-  {{gebruiker.adres.postcode}}
-  {{gebruiker.adres.stad}}
-  {{gebruiker.wachtwoord}}
-  {{gebruiker.email}}
-  <!--  {{gebruiker.akkoordMetVoorwaarde}}-->
+  {{gebruiker | json}}
 </div>
 
 

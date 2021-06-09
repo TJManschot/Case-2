@@ -13,7 +13,7 @@ import {RouterModule} from "@angular/router";
 import {routes} from "./app-routes";
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {NewUserPagina} from './pages/new-user-pagina/new-user.pagina';
-import {SignupComponent} from './components/signup/signup.component';
+import {SignupComponent} from './components/aanmelden/aanmelden.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AdresVragenComponent} from './components/adres-vragen/adres-vragen.component';
 
