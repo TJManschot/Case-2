@@ -6,8 +6,6 @@ public enum Bezorgwijzen {
     VERSTUREN(false),
     VERSTUREN_ONDER_REMBOURS(false);
 
-
-
     Bezorgwijzen(boolean verplichtAdres) {
         this.verplichtAdres = verplichtAdres;
     }
