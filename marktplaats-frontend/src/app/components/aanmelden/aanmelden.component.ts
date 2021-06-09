@@ -47,13 +47,6 @@ export class SignupComponent implements OnInit {
       email: ['', [Validators.required, emailValidator]],
       adres: this.adresForm
     })
-    this.maakGebruikerForm();
-
-  }
-
-  public maakGebruikerForm (): void{
-
-
   }
 
   updateState() {
