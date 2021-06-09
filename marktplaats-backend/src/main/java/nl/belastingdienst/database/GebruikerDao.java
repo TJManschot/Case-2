@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface GebruikerDao {
     List<Gebruiker> get();
-    Gebruiker add(Gebruiker gebruiker);
+    void add(Gebruiker gebruiker);
 }

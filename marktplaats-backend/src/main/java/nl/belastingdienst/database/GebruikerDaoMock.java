@@ -3,10 +3,11 @@ package nl.belastingdienst.database;
 import nl.belastingdienst.model.Gebruiker;
 
 import javax.ejb.Stateful;
+import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
-@Stateful
+@Stateful @Alternative
 public class GebruikerDaoMock implements GebruikerDao {
     List<Gebruiker> gebruikers = new ArrayList<>();
 
@@ -21,8 +22,7 @@ public class GebruikerDaoMock implements GebruikerDao {
     }
 
     @Override
-    public Gebruiker add(Gebruiker gebruiker) {
+    public void add(Gebruiker gebruiker) {
         gebruikers.add(gebruiker);
-        return gebruiker;
     }
 }
