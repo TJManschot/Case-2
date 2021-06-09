@@ -7,21 +7,21 @@
           Inloggen
         </a>
         <div aria-labelledby="dropdownForm1" ngbDropdownMenu>
-          <form class="px-4 py-3">
+          <form class="px-4 py-3" (ngSubmit)="login()" [formGroup]="loginForm">
             <div class="form-group">
-              <label for="exampleDropdownFormEmail1">Email-adres</label>
-              <input autocomplete="username" class="form-control" id="exampleDropdownFormEmail1"
-                     placeholder="Email"
-                     type="email">
+              <label for="gebruikersnaam">Gebruikersnaam</label>
+              <input autocomplete="username" class="form-control" formControlName="gebruikersnaam"
+                     id="gebruikersnaam" placeholder=""
+                     type="text">
             </div>
             <div class="form-group">
-              <label for="exampleDropdownFormPassword1">Wachtwoord</label>
-              <input autocomplete="current-password" class="form-control" id="exampleDropdownFormPassword1"
-                     placeholder="*******"
+              <label for="wachtwoord">Wachtwoord</label>
+              <input autocomplete="current-password" class="form-control" formControlName="wachtwoord"
+                     id="wachtwoord" placeholder=""
                      type="password">
             </div>
 
-            <button class="btn btn-primary" type="submit">Log in</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Log in</button>
 
           </form>
           <div class="dropdown-divider"></div>
