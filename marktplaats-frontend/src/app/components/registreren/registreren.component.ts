@@ -15,8 +15,8 @@ import {newArray} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './aanmelden.component.html',
-  styleUrls: ['./aanmelden.component.css']
+  templateUrl: './registreren.component.html',
+  styleUrls: ['./registreren.component.css']
 })
 export class SignupComponent implements OnInit {
   gebruikers: Gebruiker[] = [];

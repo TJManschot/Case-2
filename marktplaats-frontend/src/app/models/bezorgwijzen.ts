@@ -1,0 +1,6 @@
+enum Bezorgwijzen{
+  MAGAZIJN,
+  OPHALEN,
+  VERSTUREN,
+  VERSTUREN_ONDER_REMBOURS,
+}
