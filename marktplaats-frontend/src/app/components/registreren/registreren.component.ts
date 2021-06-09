@@ -1,17 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Gebruiker} from "../../models/gebruiker";
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  AbstractControl,
-  ControlContainer,
-  FormControl,
-  FormArray
-} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {GebruikerService} from "../../services/gebruiker.service";
-import {AdresVragenComponent} from "../adres-vragen/adres-vragen.component";
-import {newArray} from "@angular/compiler/src/util";
+import {Bezorgwijzen} from "../../models/bezorgwijzen";
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +11,12 @@ import {newArray} from "@angular/compiler/src/util";
 })
 export class SignupComponent implements OnInit {
   gebruikers: Gebruiker[] = [];
+  Bezorgwijzen: Bezorgwijzen;
+  bezorgwijzen = [];
 
+  get ordersFormArray() {
+    return this.gebruikerForm.controls.bezorgwijzen as FormArray;
+  }
   thuisAfhalen: boolean = false;
 
   // @ts-ignore
@@ -45,13 +41,30 @@ export class SignupComponent implements OnInit {
     this.gebruikerForm = this.fb.group({
       gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
       email: ['', [Validators.required, emailValidator]],
-      adres: this.adresForm
-    })
+      adres: this.adresForm,
+      bezorgwijzen: new FormArray([], minSelectedCheckboxes(1))
+    });
+
+    this.bezorgwijzen = this.getBezorgwijzen();
+    this.addCheckboxes();
   }
+
+  private addCheckboxes() {
+    this.bezorgwijzen.forEach(() => this.ordersFormArray.push(new FormControl(false)));
+  }
+
+  getBezorgwijzen() {
+    return Object.values(Bezorgwijzen);
+  }
+
 
   updateState() {
     this.thuisAfhalen = !this.thuisAfhalen;
   }
+
+  // onCheckboxChange(value) {
+  //   this.bezorgwijzenArray.push(Bezorgwijzen.MAGAZIJN.toString());
+  // }
 
   addGebruiker() {
     this.gebruikerService.addGebruiker(this.gebruikerForm.value);
@@ -66,4 +79,19 @@ function emailValidator(control: AbstractControl) {
   }
   const regex = /^.+@.+\.[a-zA-Z]+$/;
   return regex.test(control.value) ? null : {email: {valid: false}};
+}
+
+function minSelectedCheckboxes(min = 1) {
+  const validator: ValidatorFn = (formArray: FormArray) => {
+    const totalSelected = formArray.controls
+      // get a list of checkbox values (boolean)
+      .map(control => control.value)
+      // total up the number of checked checkboxes
+      .reduce((prev, next) => next ? prev + next : prev, 0);
+
+    // if the total is not greater than the minimum, return the error message
+    return totalSelected >= min ? null : { required: true };
+  };
+
+  return validator;
 }
