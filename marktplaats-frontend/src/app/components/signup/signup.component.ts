@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Gebruiker} from "../../models/gebruiker";
-import {FormGroup, FormBuilder, Validators, AbstractControl, NgForm} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {GebruikerService} from "../../services/gebruiker.service";
 
 @Component({
@@ -30,15 +30,13 @@ export class SignupComponent implements OnInit {
     this.gebruikers = this.gebruikerService.getGebruikers();
 
     this.toevoegenGebruikerForm = this.fb.group({
-      voornaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
-      achternaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
+      gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
       email: ['', [Validators.required, emailValidator]],
       adres: this.fb.group({
         straatnaam: [''],
         huisnummer: [''],
         postcode: [''],
-        stad: [''],
-        provincie: ['']
+        stad: ['']
       })
     });
   }
