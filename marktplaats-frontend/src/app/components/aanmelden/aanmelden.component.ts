@@ -22,8 +22,11 @@ export class SignupComponent implements OnInit {
   gebruikers: Gebruiker[] = [];
 
   thuisAfhalen: boolean = false;
+
   // @ts-ignore
-  public toevoegenGebruikerForm: formGroup;
+  gebruikerForm: FormGroup
+  adresForm: FormGroup | undefined;
+
   constructor(
     private fb: FormBuilder,
     private gebruikerService: GebruikerService
@@ -33,21 +36,23 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.gebruikers = this.gebruikerService.getGebruikers();
-    this.maakGebruikersFormulier();
+    this.adresForm = this.fb.group({
+      straatnaam: [''],
+      huisnummer: [''],
+      postcode: [''],
+      stad: ['']
+    })
+    this.gebruikerForm = this.fb.group({
+      gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
+      email: ['', [Validators.required, emailValidator]],
+      adres: this.adresForm
+    })
+    this.maakGebruikerForm();
 
   }
 
-  public maakGebruikersFormulier (): void{
-    this.toevoegenGebruikerForm = this.fb.group({
-      gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
-      email: ['', [Validators.required, emailValidator]],
-      adres: this.fb.group({
-        straatnaam: [''],
-        huisnummer: [''],
-        postcode: [''],
-        stad: ['']
-      })
-    });
+  public maakGebruikerForm (): void{
+
 
   }
 
@@ -56,8 +61,8 @@ export class SignupComponent implements OnInit {
   }
 
   addGebruiker() {
-    this.gebruikerService.addGebruiker(this.toevoegenGebruikerForm.value);
-    console.log(this.toevoegenGebruikerForm.value);
+    this.gebruikerService.addGebruiker(this.gebruikerForm.value);
+    console.log(this.gebruikerForm.value);
   }
 }
 
