@@ -41,8 +41,8 @@ export class InlogService {
   handleHappyLogin(gebruiker: Gebruiker) {
     this.message$.next(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
-    this._gebruiker$.next(gebruiker);
     this._loggedIn$.next(true);
+    this._gebruiker$.next(gebruiker);
   }
   handleLoginError(response: HttpErrorResponse) {
     this.message$.next('Statuscode: ' + response.status + '\nFoutmelding: ' + response.error);
