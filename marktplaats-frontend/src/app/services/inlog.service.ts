@@ -13,7 +13,9 @@ export class InlogService {
   // tslint:disable-next-line:variable-name
   private _message$ = new Subject<string>();
   // tslint:disable-next-line:variable-name
-  private _gebruiker: Gebruiker;
+  private _gebruiker$ = new Subject<Gebruiker>();
+  // tslint:disable-next-line:variable-name
+  private _loggedIn$ = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
   }
@@ -21,24 +23,28 @@ export class InlogService {
   get message$(): Subject<string> {
     return this._message$;
   }
-  get gebruiker(): Gebruiker {
-    return this._gebruiker;
+  get gebruiker$(): Subject<Gebruiker> {
+    return this._gebruiker$;
+  }
+  get loggedIn$(): Subject<boolean> {
+    return this._loggedIn$;
   }
 
   login(gebruiker: Gebruiker): void {
     console.log(gebruiker.gebruikersnaam + ' probeert in te loggen.');
     this.http.post<Gebruiker>(this.uri, gebruiker)
       .subscribe(
-        response => this.handleHappy(response),
-        response => this.handleError(response)
+        response => this.handleHappyLogin(response),
+        response => this.handleLoginError(response)
       );
   }
-  handleHappy(gebruiker: Gebruiker) {
+  handleHappyLogin(gebruiker: Gebruiker) {
     this.message$.next(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
-    this._gebruiker = gebruiker;
+    this._gebruiker$.next(gebruiker);
+    this._loggedIn$.next(true);
   }
-  handleError(response: HttpErrorResponse) {
+  handleLoginError(response: HttpErrorResponse) {
     this.message$.next('Statuscode: ' + response.status + '\nFoutmelding: ' + response.error);
     console.log('Statuscode: ' + response.status + '\nFoutmelding: ' + response.error);
   }

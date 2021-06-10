@@ -17,6 +17,7 @@ import {SignupComponent} from './components/registreren/registreren.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdresVragenComponent} from './components/adres-vragen/adres-vragen.component';
 import {HttpClientModule} from '@angular/common/http';
+import { LoguitComponent } from './components/loguit/loguit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {HttpClientModule} from '@angular/common/http';
     UserProfileComponent,
     NewUserPagina,
     SignupComponent,
-    AdresVragenComponent],
+    AdresVragenComponent,
+    LoguitComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

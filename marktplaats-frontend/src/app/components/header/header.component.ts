@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {InlogService} from '../../services/inlog.service';
 
 @Component({
   selector: 'app-header',
@@ -6,17 +7,15 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  private _loggedIn: boolean = false;
+  // tslint:disable-next-line:variable-name
+  private _loggedIn = false;
 
   get loggedIn(): boolean {
     return this._loggedIn;
   }
 
-  set loggedIn(value: boolean) {
-    this._loggedIn = value;
-  }
-
-  constructor() {
+  constructor(private inlogService: InlogService) {
+    inlogService.loggedIn$.subscribe(bool => this._loggedIn = bool);
   }
 
   ngOnInit(): void {
