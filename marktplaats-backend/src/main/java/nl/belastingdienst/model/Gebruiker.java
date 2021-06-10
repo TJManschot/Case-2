@@ -15,7 +15,7 @@ public class Gebruiker {
     private Adres adres;
     private boolean akkoordMetVoorwaarden;
     @ElementCollection
-    private Set<Bezorgwijzen> bezorgwijzenSet;
+    private Set<Bezorgwijzen> bezorgwijzen;
 
 
 
@@ -71,11 +71,15 @@ public class Gebruiker {
         this.akkoordMetVoorwaarden = akkoordMetVoorwaarden;
     }
 
-    public Set<Bezorgwijzen> getBezorgwijzenSet() {
-        return bezorgwijzenSet;
+    public Set<Bezorgwijzen> getBezorgwijzen() {
+        return bezorgwijzen;
     }
 
-    public void setBezorgwijzenSet(Set<Bezorgwijzen> bezorgwijzenSet) {
-        this.bezorgwijzenSet = bezorgwijzenSet;
+    public void setBezorgwijzen(Set<Bezorgwijzen> bezorgwijzen) {
+        this.bezorgwijzen = bezorgwijzen;
+    }
+
+    public void addBezorgwijzen(Bezorgwijzen bezorgwijze){
+        this.bezorgwijzen.add(bezorgwijze);
     }
 }
