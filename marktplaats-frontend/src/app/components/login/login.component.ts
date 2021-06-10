@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {InlogService} from '../../services/inlog.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,10 @@ import {InlogService} from '../../services/inlog.service';
 export class LoginComponent {
   gebruikersnaam = new FormControl('', Validators.required);
   wachtwoord = new FormControl('', Validators.required);
+  message$: Subject<string>;
 
   constructor(private inlogService: InlogService) {
+    this.message$ = this.inlogService.message$;
   }
 
   loginForm = new FormGroup({
