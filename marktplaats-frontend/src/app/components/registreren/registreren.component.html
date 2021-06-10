@@ -14,10 +14,10 @@
 
   <div *ngFor="let bezorgwijze of bezorgwijzen; let i = index">
     <label formArrayName="bezorgwijzen">
-      <input *ngIf="bezorgwijzen[i] !=='Ophalen'" type="checkbox" [formControlName]="i" />
-      <input *ngIf="bezorgwijzen[i] ==='Ophalen'" (change)="updateState()" type="checkbox" [formControlName]="i" />
-      {{bezorgwijzen[i]}}
-      <div *ngIf="bezorgwijzen[i] ==='Ophalen' && thuisAfhalen">
+      <input *ngIf="bezorgwijze !=='Ophalen'" type="checkbox" [formControlName]="i" />
+      <input *ngIf="bezorgwijze ==='Ophalen'" (change)="updateState()" type="checkbox" [formControlName]="i" />
+      {{bezorgwijze}}
+      <div *ngIf="bezorgwijze ==='Ophalen' && ophalenChecked">
         <app-adres-vragen [adres]="gebruikerForm.get('adres')"></app-adres-vragen>
       </div>
     </label>

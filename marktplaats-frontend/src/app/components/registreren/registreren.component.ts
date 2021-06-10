@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   get ordersFormArray() {
     return this.gebruikerForm.controls.bezorgwijzen as FormArray;
   }
-  thuisAfhalen: boolean = false;
+  ophalenChecked: boolean = false;
 
   // @ts-ignore
   gebruikerForm: FormGroup
@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
 
 
   updateState() {
-    this.thuisAfhalen = !this.thuisAfhalen;
+    this.ophalenChecked = !this.ophalenChecked;
   }
 
   addGebruiker() {
