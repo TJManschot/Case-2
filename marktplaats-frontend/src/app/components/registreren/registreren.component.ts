@@ -11,7 +11,6 @@ import {Bezorgwijzen} from "../../models/bezorgwijzen";
 })
 export class SignupComponent implements OnInit {
   gebruikers: Gebruiker[] = [];
-  Bezorgwijzen: Bezorgwijzen;
   bezorgwijzen = [];
 
   get ordersFormArray() {
@@ -42,7 +41,7 @@ export class SignupComponent implements OnInit {
       gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
       email: ['', [Validators.required, emailValidator]],
       adres: this.adresForm,
-      bezorgwijzen: new FormArray([], minSelectedCheckboxes(1))
+      bezorgwijzen: new FormArray([])
     });
 
     this.bezorgwijzen = this.getBezorgwijzen();
@@ -62,10 +61,6 @@ export class SignupComponent implements OnInit {
     this.thuisAfhalen = !this.thuisAfhalen;
   }
 
-  // onCheckboxChange(value) {
-  //   this.bezorgwijzenArray.push(Bezorgwijzen.MAGAZIJN.toString());
-  // }
-
   addGebruiker() {
     this.gebruikerService.addGebruiker(this.gebruikerForm.value);
     console.log(this.gebruikerForm.value);
@@ -81,17 +76,3 @@ function emailValidator(control: AbstractControl) {
   return regex.test(control.value) ? null : {email: {valid: false}};
 }
 
-function minSelectedCheckboxes(min = 1) {
-  const validator: ValidatorFn = (formArray: FormArray) => {
-    const totalSelected = formArray.controls
-      // get a list of checkbox values (boolean)
-      .map(control => control.value)
-      // total up the number of checked checkboxes
-      .reduce((prev, next) => next ? prev + next : prev, 0);
-
-    // if the total is not greater than the minimum, return the error message
-    return totalSelected >= min ? null : { required: true };
-  };
-
-  return validator;
-}
