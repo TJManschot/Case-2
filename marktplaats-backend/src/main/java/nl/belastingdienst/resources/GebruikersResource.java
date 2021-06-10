@@ -2,6 +2,7 @@ package nl.belastingdienst.resources;
 
 import nl.belastingdienst.database.GebruikerDao;
 import nl.belastingdienst.model.Gebruiker;
+import nl.belastingdienst.resources.util.BezorgwijzenUtil;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -22,11 +23,13 @@ public class GebruikersResource implements JsonResource {
 
     @POST
     public Gebruiker post(Gebruiker gebruiker) {
+        BezorgwijzenUtil b = new BezorgwijzenUtil();
+        b.bezorgwijzenFix(gebruiker);
         gebruikerDao.add(gebruiker);
         return gebruiker;
     }
 
-    @POST @Path("login")
+    @POST @Path("/login")
     public void login(Gebruiker input) {
         String gebruikersnaam = input.getGebruikersnaam();
         String wachtwoord = input.getWachtwoord();

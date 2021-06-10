@@ -1,9 +1,7 @@
 package nl.belastingdienst.model;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Gebruiker {
@@ -16,6 +14,9 @@ public class Gebruiker {
     @Embedded
     private Adres adres;
     private boolean akkoordMetVoorwaarden;
+    @ElementCollection
+    private Set<Bezorgwijzen> bezorgwijzenSet;
+
 
 
     public Gebruiker() { }
@@ -68,5 +69,13 @@ public class Gebruiker {
 
     public void setAkkoordMetVoorwaarden(boolean akkoordMetVoorwaarden) {
         this.akkoordMetVoorwaarden = akkoordMetVoorwaarden;
+    }
+
+    public Set<Bezorgwijzen> getBezorgwijzenSet() {
+        return bezorgwijzenSet;
+    }
+
+    public void setBezorgwijzenSet(Set<Bezorgwijzen> bezorgwijzenSet) {
+        this.bezorgwijzenSet = bezorgwijzenSet;
     }
 }

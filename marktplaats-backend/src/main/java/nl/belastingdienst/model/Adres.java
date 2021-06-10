@@ -4,17 +4,17 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Adres {
-    private String straat;
+    private String straatnaam;
     private String huisnummer;
     private String postcode;
     private String stad;
 
-    public String getStraat() {
-        return straat;
+    public String getStraatnaam() {
+        return straatnaam;
     }
 
-    public void setStraat(String straat) {
-        this.straat = straat;
+    public void setStraatnaam(String straat) {
+        this.straatnaam = straat;
     }
 
     public String getHuisnummer() {

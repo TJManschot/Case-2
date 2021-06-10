@@ -8,5 +8,5 @@ export interface Gebruiker {
   wachtwoord: string;
   akkoordMetVoorwaarden?: boolean;
   adres: Adres;
-  bezorgwijze: string[];
+  bezorgwijzen: Bezorgwijzen[];
 }
