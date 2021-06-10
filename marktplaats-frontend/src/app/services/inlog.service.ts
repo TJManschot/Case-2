@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Gebruiker} from '../models/gebruiker';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class InlogService {
   // tslint:disable-next-line:variable-name
   private _message$ = new Subject<string>();
   // tslint:disable-next-line:variable-name
-  private _gebruiker$ = new Subject<Gebruiker>();
+  private _gebruiker$ = new ReplaySubject<Gebruiker>(1);
   // tslint:disable-next-line:variable-name
   private _loggedIn$ = new Subject<boolean>();
 
@@ -39,7 +39,6 @@ export class InlogService {
       );
   }
   handleHappyLogin(gebruiker: Gebruiker) {
-    this.message$.next(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
     this._loggedIn$.next(true);
     this._gebruiker$.next(gebruiker);
@@ -47,5 +46,9 @@ export class InlogService {
   handleLoginError(response: HttpErrorResponse) {
     this.message$.next('Statuscode: ' + response.status + '\nFoutmelding: ' + response.error);
     console.log('Statuscode: ' + response.status + '\nFoutmelding: ' + response.error);
+  }
+  loguit(): void {
+    this.loggedIn$.next(false);
+    console.log('Gebruiker uitgelogd.');
   }
 }

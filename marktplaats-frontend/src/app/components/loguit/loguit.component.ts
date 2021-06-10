@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {InlogService} from '../../services/inlog.service';
 
 @Component({
   selector: 'app-loguit',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoguitComponent implements OnInit {
 
-  constructor() { }
+  constructor(private inlogService: InlogService) { }
 
+  loguit(): void {
+    this.inlogService.loguit();
+  }
   ngOnInit(): void {
   }
 

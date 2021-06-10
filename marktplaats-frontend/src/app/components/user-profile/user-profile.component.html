@@ -4,15 +4,15 @@
       <li class="nav-item" display="dynamic" ngbDropdown placement="bottom-right">
         <a class="nav-link" id="navbarDropdown3" ngbDropdownToggle role="button" tabindex="0">
           <i class="bi bi-person-circle"></i>
-          Profiel
+          {{gebruikersnaam}}
         </a>
         <div aria-labelledby="dropdownForm1" ngbDropdownMenu>
-          <div ngbDropdownItem>{{gebruikersnaam}}</div>
+          <div ngbDropdownItem>Profielbeheer</div>
           <div class="dropdown-divider"></div>
           <button ngbDropdownItem>Account aanpassen</button>
           <button ngbDropdownItem>Account verwijderen</button>
           <button ngbDropdownItem>Advertentie aanmaken</button>
-          <button ngbDropdownItem>Uitloggen</button>
+          <app-loguit></app-loguit>
         </div>
       </li>
     </ul>
