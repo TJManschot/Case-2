@@ -3,7 +3,13 @@ import {Gebruiker} from "../models/gebruiker";
 import {Adres} from "../models/adres";
 import {Bezorgwijzen} from "../models/bezorgwijzen";
 import {Observable, Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +22,7 @@ export class GebruikerService {
 
   addGebruiker(nieuweGebruiker: Gebruiker){
     nieuweGebruiker = this.bezorgwijzenFix(nieuweGebruiker);
-    this.http.post(this.url, nieuweGebruiker).subscribe(()=> this.getGebruiker())
+    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe(() => this.getGebruiker())
   }
 
   getGebruiker(): Observable<Gebruiker[]> {
