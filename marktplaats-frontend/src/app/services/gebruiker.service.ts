@@ -15,7 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class GebruikerService {
-  private url = 'http://localhost:9080/markplaats/api/gebruikers';
+  private url = 'http://localhost:9080/marktplaats/api/gebruikers';
   private gebruikerSubject = new Subject<Gebruiker[]>();
 
   constructor(private http: HttpClient) { }
