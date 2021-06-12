@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Gebruiker} from '../models/gebruiker';
 import {ReplaySubject, Subject} from 'rxjs';
 import {Inloggegevens} from '../models/inloggegevens';
@@ -32,8 +32,12 @@ export class InlogService {
   }
 
   login(inloggegevens: Inloggegevens): void {
+    const header = {
+      headers: new HttpHeaders()
+        .set('Authorization',  `Basic ` + inloggegevens.gebruikersnaam + ':' + inloggegevens.wachtwoord)
+    };
     console.log(inloggegevens.gebruikersnaam + ' probeert in te loggen.');
-    this.http.post<Gebruiker>(this.uri, inloggegevens)
+    this.http.post<Gebruiker>(this.uri, inloggegevens, header)
       .subscribe(
         response => this.handleHappyLogin(response),
         response => this.handleLoginError(response)
@@ -47,7 +51,7 @@ export class InlogService {
   }
   handleLoginError(response: HttpErrorResponse) {
     this.message$.next('Statuscode: ' + response.status + '\nFoutmelding: ' + response.error);
-    console.log('Statuscode: ' + response.status + '\nFoutmelding: ' + response.error);
+    console.log('Statuscode: ' + response.status + '; Foutmelding: ' + response.error);
   }
   loguit(): void {
     this.loggedIn$.next(false);

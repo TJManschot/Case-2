@@ -2,11 +2,12 @@ package nl.belastingdienst.resources;
 
 import nl.belastingdienst.database.GebruikerDao;
 import nl.belastingdienst.model.Gebruiker;
-import nl.belastingdienst.model.Inloggegevens;
+import nl.belastingdienst.security.Wachtwoordverwerker;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -20,6 +21,9 @@ public class GebruikersResource implements JsonResource {
 
     @Inject
     GebruikerDao gebruikerDao;
+
+    @Inject
+    Wachtwoordverwerker wachtwoordverwerker;
 
     @GET
     public List<Gebruiker> get() {
@@ -35,9 +39,16 @@ public class GebruikersResource implements JsonResource {
     }
 
     @POST @Path("login")
-    public Response login(Inloggegevens inloggegevens) {
-        String gebruikersnaam = inloggegevens.getGebruikersnaam();
-        String wachtwoord = inloggegevens.getWachtwoord();
+    public Response login(@HeaderParam("Authorization") String header) {
+        if(!header.startsWith("Basic ") || !header.contains(":"))
+            return Response.status(400)
+                .type(MediaType.TEXT_PLAIN_TYPE)
+                .entity("De Authorization-header is niet correct.")
+                .build();
+
+        String[] inloggegevens = header.substring(6).split(":");
+        String gebruikersnaam = inloggegevens[0];
+        String wachtwoord = inloggegevens[1];
 
         log.info("Gebruiker ophalen uit database ...");
         List<Gebruiker> gebruikerList = gebruikerDao.getByGebruikersnaam(gebruikersnaam);
@@ -52,7 +63,7 @@ public class GebruikersResource implements JsonResource {
 
         Gebruiker gebruiker = gebruikerList.get(0);
 
-        if(!wachtwoord.equals(gebruiker.getHash())) {
+        if(!wachtwoordverwerker.valideer(wachtwoord, gebruiker.getHash())) {
             log.warn("Wachtwoord niet correct!");
             return Response.status(401)
                     .type(MediaType.TEXT_PLAIN_TYPE)
