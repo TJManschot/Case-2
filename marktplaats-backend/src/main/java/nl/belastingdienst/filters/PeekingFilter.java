@@ -15,7 +15,7 @@ public class PeekingFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext containerRequestContext) {
-        log.warn("Backend intercepted incoming " + containerRequestContext.getMethod() + " request.");
+        log.warn("Backend received incoming " + containerRequestContext.getMethod() + " request.");
 
     }
 }
