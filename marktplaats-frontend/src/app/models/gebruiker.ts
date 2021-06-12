@@ -5,7 +5,6 @@ export interface Gebruiker {
   id: number;
   gebruikersnaam: string;
   email: string;
-  wachtwoord: string;
   akkoordMetVoorwaarden?: boolean;
   adres: Adres;
   bezorgwijzen: Bezorgwijzen[];

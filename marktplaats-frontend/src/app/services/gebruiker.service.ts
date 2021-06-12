@@ -45,7 +45,6 @@ export class GebruikerService {
       id: 0,
       gebruikersnaam: "Richardson",
       email: "jay.richardson@outlook.com",
-      wachtwoord: "Wachtwoord",
       adres: this.adres,
       bezorgwijzen: [Bezorgwijzen.MAGAZIJN, Bezorgwijzen.VERSTUREN]
     }
