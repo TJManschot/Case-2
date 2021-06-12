@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Gebruiker} from '../models/gebruiker';
 import {ReplaySubject, Subject} from 'rxjs';
+import {Inloggegevens} from '../models/inloggegevens';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,9 @@ export class InlogService {
     return this._loggedIn$;
   }
 
-  login(gebruiker: Gebruiker): void {
-    console.log(gebruiker.gebruikersnaam + ' probeert in te loggen.');
-    this.http.post<Gebruiker>(this.uri, gebruiker)
+  login(inloggegevens: Inloggegevens): void {
+    console.log(inloggegevens.gebruikersnaam + ' probeert in te loggen.');
+    this.http.post<Gebruiker>(this.uri, inloggegevens)
       .subscribe(
         response => this.handleHappyLogin(response),
         response => this.handleLoginError(response)
@@ -40,6 +41,7 @@ export class InlogService {
   }
   handleHappyLogin(gebruiker: Gebruiker) {
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
+    localStorage.setItem('LoggedIn', 'true');
     this._loggedIn$.next(true);
     this._gebruiker$.next(gebruiker);
   }
@@ -49,6 +51,7 @@ export class InlogService {
   }
   loguit(): void {
     this.loggedIn$.next(false);
+    localStorage.setItem('LoggedIn', 'false');
     console.log('Gebruiker uitgelogd.');
   }
 }

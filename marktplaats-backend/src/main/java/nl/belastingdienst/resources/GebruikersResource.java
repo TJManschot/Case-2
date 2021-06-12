@@ -2,6 +2,7 @@ package nl.belastingdienst.resources;
 
 import nl.belastingdienst.database.GebruikerDao;
 import nl.belastingdienst.model.Gebruiker;
+import nl.belastingdienst.model.Inloggegevens;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -34,9 +35,9 @@ public class GebruikersResource implements JsonResource {
     }
 
     @POST @Path("login")
-    public Response login(Gebruiker input) {
-        String gebruikersnaam = input.getGebruikersnaam();
-        String wachtwoord = input.getWachtwoord();
+    public Response login(Inloggegevens inloggegevens) {
+        String gebruikersnaam = inloggegevens.getGebruikersnaam();
+        String wachtwoord = inloggegevens.getWachtwoord();
 
         log.info("Gebruiker ophalen uit database ...");
         List<Gebruiker> gebruikerList = gebruikerDao.getByGebruikersnaam(gebruikersnaam);
