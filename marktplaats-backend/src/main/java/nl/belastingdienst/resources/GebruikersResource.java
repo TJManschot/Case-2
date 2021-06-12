@@ -52,7 +52,7 @@ public class GebruikersResource implements JsonResource {
 
         Gebruiker gebruiker = gebruikerList.get(0);
 
-        if(!wachtwoord.equals(gebruiker.getWachtwoord())) {
+        if(!wachtwoord.equals(gebruiker.getHash())) {
             log.warn("Wachtwoord niet correct!");
             return Response.status(401)
                     .type(MediaType.TEXT_PLAIN_TYPE)

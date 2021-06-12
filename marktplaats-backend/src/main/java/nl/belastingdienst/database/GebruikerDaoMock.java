@@ -12,8 +12,8 @@ public class GebruikerDaoMock implements GebruikerDao {
     List<Gebruiker> gebruikers = new ArrayList<>();
 
     {
-        gebruikers.add(new Gebruiker("Thomas", "pw"));
-        gebruikers.add(new Gebruiker("Jay", "wachtwoord"));
+        gebruikers.add(new Gebruiker());
+        gebruikers.add(new Gebruiker());
     }
 
     @Override

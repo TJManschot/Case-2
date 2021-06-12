@@ -9,7 +9,7 @@ public class Gebruiker {
     @Id @GeneratedValue
     private long id;
     private String gebruikersnaam;
-    private String wachtwoord;
+    private String hash;
     private String email;
     @Embedded
     private Adres adres;
@@ -17,13 +17,7 @@ public class Gebruiker {
     @ElementCollection
     private Set<Bezorgwijzen> bezorgwijzen;
 
-
-
     public Gebruiker() { }
-    public Gebruiker(String gebruikersnaam, String wachtwoord) {
-        this.gebruikersnaam = gebruikersnaam;
-        this.wachtwoord = wachtwoord;
-    }
 
     public long getId() {
         return id;
@@ -39,12 +33,12 @@ public class Gebruiker {
         this.gebruikersnaam = gebruikersnaam;
     }
 
-    public String getWachtwoord() {
-        return wachtwoord;
+    public String getHash() {
+        return hash;
     }
 
-    public void setWachtwoord(String wachtwoord) {
-        this.wachtwoord = wachtwoord;
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getEmail() {
