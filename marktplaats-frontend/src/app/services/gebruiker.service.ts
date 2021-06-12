@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Gebruiker} from "../models/gebruiker";
-import {Adres} from "../models/adres";
-import {Bezorgwijzen} from "../models/bezorgwijzen";
-import {Observable, Subject} from "rxjs";
+import {Gebruiker} from '../models/gebruiker';
+import {Adres} from '../models/adres';
+import {Bezorgwijzen} from '../models/bezorgwijzen';
+import {Observable, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 const httpOptions = {
@@ -22,7 +22,7 @@ export class GebruikerService {
 
   addGebruiker(nieuweGebruiker: Gebruiker){
     nieuweGebruiker = this.bezorgwijzenFix(nieuweGebruiker);
-    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe(() => this.getGebruiker())
+    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe(() => this.getGebruiker());
   }
 
   getGebruiker(): Observable<Gebruiker[]> {
@@ -33,18 +33,19 @@ export class GebruikerService {
   }
 
   adres: Adres = {
-    straat: "Kees van Dongenpad",
-    huisnummer: "59",
-    postcode: "1112WZ",
-    stad: "Diemen"
+    straat: 'Kees van Dongenpad',
+    huisnummer: '59',
+    postcode: '1112WZ',
+    stad: 'Diemen'
   };
 
 
   private gebruikers: Gebruiker[] = [
     {
       id: 0,
-      gebruikersnaam: "Richardson",
-      email: "jay.richardson@outlook.com",
+      gebruikersnaam: 'Richardson',
+      email: 'jay.richardson@outlook.com',
+      wachtwoord: 'Wachtwoord',
       adres: this.adres,
       bezorgwijzen: [Bezorgwijzen.MAGAZIJN, Bezorgwijzen.VERSTUREN]
     }
@@ -59,19 +60,19 @@ export class GebruikerService {
   //   this.gebruikers.push(nieuweGebruiker);
   // }
 
-  bezorgwijzenFix(g: Gebruiker) :Gebruiker {
+  bezorgwijzenFix(g: Gebruiker): Gebruiker {
     const bezorgwijzenArrayFix: Bezorgwijzen[] = [];
-    if(g.bezorgwijzen[0].valueOf().toString() === "true"){
-      bezorgwijzenArrayFix.push(Bezorgwijzen.MAGAZIJN)
+    if (g.bezorgwijzen[0].valueOf().toString() === 'true'){
+      bezorgwijzenArrayFix.push(Bezorgwijzen.MAGAZIJN);
     }
-    if (g.bezorgwijzen[1].valueOf().toString() === "true"){
-      bezorgwijzenArrayFix.push(Bezorgwijzen.OPHALEN)
+    if (g.bezorgwijzen[1].valueOf().toString() === 'true'){
+      bezorgwijzenArrayFix.push(Bezorgwijzen.OPHALEN);
     }
-    if (g.bezorgwijzen[2].valueOf().toString() === "true"){
-      bezorgwijzenArrayFix.push(Bezorgwijzen.VERSTUREN)
+    if (g.bezorgwijzen[2].valueOf().toString() === 'true'){
+      bezorgwijzenArrayFix.push(Bezorgwijzen.VERSTUREN);
     }
-    if (g.bezorgwijzen[3].valueOf().toString() === "true"){
-      bezorgwijzenArrayFix.push(Bezorgwijzen.VERSTUREN_ONDER_REMBOURS)
+    if (g.bezorgwijzen[3].valueOf().toString() === 'true'){
+      bezorgwijzenArrayFix.push(Bezorgwijzen.VERSTUREN_ONDER_REMBOURS);
     }
     g.bezorgwijzen = [];
     g.bezorgwijzen = bezorgwijzenArrayFix;
