@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {InlogService} from '../../services/inlog/inlog.service';
+import {Gebruiker} from '../../models/gebruiker';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,5 +17,9 @@ export class UserProfileComponent implements OnInit{
     this.inlogService.gebruiker$.subscribe(gebruiker => this._gebruikersnaam = gebruiker.gebruikersnaam);
   }
   ngOnInit(): void {
+    const gebruiker: Gebruiker = JSON.parse(localStorage.getItem('Gebruiker'));
+    if (gebruiker !== undefined) {
+      this._gebruikersnaam = gebruiker.gebruikersnaam;
+    }
   }
 }

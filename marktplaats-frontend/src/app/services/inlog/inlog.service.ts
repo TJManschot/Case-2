@@ -48,6 +48,7 @@ export class InlogService {
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
     localStorage.setItem('Token', response.headers.get('Authorization').substring(7));
     localStorage.setItem('LoggedIn', 'true');
+    localStorage.setItem('Gebruiker', JSON.stringify(gebruiker));
     this._loggedIn$.next(true);
     this._gebruiker$.next(gebruiker);
   }
@@ -58,6 +59,8 @@ export class InlogService {
   loguit(): void {
     this.loggedIn$.next(false);
     localStorage.setItem('LoggedIn', 'false');
+    localStorage.setItem('Token', '');
+    localStorage.setItem('Gebruiker', '');
     console.log('Gebruiker uitgelogd.');
   }
 }
