@@ -2,6 +2,7 @@ package nl.belastingdienst.resources;
 
 import nl.belastingdienst.database.GebruikerDao;
 import nl.belastingdienst.model.Gebruiker;
+import nl.belastingdienst.security.TokenProvider;
 import nl.belastingdienst.security.Wachtwoordverwerker;
 import nl.belastingdienst.utility.WachtwoordGenerator;
 import org.slf4j.Logger;
@@ -11,8 +12,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @Path("gebruikers")
@@ -28,6 +31,12 @@ public class GebruikersResource implements JsonResource {
 
     @Inject
     WachtwoordGenerator wachtwoordGenerator;
+
+    @Inject
+    TokenProvider tokenProvider;
+
+    @Context
+    private UriInfo uriInfo;
 
     @GET
     public List<Gebruiker> get() {
@@ -78,9 +87,13 @@ public class GebruikersResource implements JsonResource {
                     .build();
         }
 
+        log.info("Token generen ...");
+        String token = tokenProvider.issueToken(gebruikersnaam, uriInfo.getAbsolutePath().toString());
+
         log.info("Gebruiker inloggen ...");
         return Response.status(200)
                 .type(MediaType.APPLICATION_JSON_TYPE)
+                .header("Authorization", "Bearer " + token)
                 .entity(gebruiker)
                 .build();
     }
