@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Gebruiker} from '../../models/gebruiker';
 import {ReplaySubject, Subject} from 'rxjs';
 import {Inloggegevens} from '../../models/inloggegevens';
@@ -32,20 +32,23 @@ export class InlogService {
   }
 
   login(inloggegevens: Inloggegevens): void {
-    const header = {
+    console.log(inloggegevens.gebruikersnaam + ' probeert in te loggen.');
+    this.http.post<Gebruiker>(this.uri, inloggegevens, {
+      observe: 'response',
       headers: new HttpHeaders()
         .set('Authorization',  `Basic ` + inloggegevens.gebruikersnaam + ':' + inloggegevens.wachtwoord)
-    };
-    console.log(inloggegevens.gebruikersnaam + ' probeert in te loggen.');
-    this.http.post<Gebruiker>(this.uri, inloggegevens, header)
+    })
       .subscribe(
         response => this.handleHappyLogin(response),
         response => this.handleLoginError(response)
       );
   }
-  handleHappyLogin(gebruiker: Gebruiker) {
+  handleHappyLogin(response: HttpResponse<Gebruiker>) {
+    const gebruiker = response.body;
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
+    localStorage.setItem('Token', response.headers.get('Authorization').substring(7));
     localStorage.setItem('LoggedIn', 'true');
+    localStorage.setItem('Gebruiker', JSON.stringify(gebruiker));
     this._loggedIn$.next(true);
     this._gebruiker$.next(gebruiker);
   }
@@ -56,6 +59,8 @@ export class InlogService {
   loguit(): void {
     this.loggedIn$.next(false);
     localStorage.setItem('LoggedIn', 'false');
+    localStorage.setItem('Token', '');
+    localStorage.setItem('Gebruiker', '');
     console.log('Gebruiker uitgelogd.');
   }
 }

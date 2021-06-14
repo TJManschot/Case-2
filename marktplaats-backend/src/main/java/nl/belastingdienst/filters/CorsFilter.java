@@ -20,9 +20,10 @@ public class CorsFilter implements ContainerResponseFilter {
         MultivaluedMap<String, Object> headers = responseContext.getHeaders();
 
         log.info("Headers toevoegen ...");
+        headers.add("Access-Control-Expose-Headers", "Authorization");
         headers.add("Access-Control-Allow-Origin", "http://localhost:4200");
         headers.add("Access-Control-Allow-Credentials", "true");
-        headers.add("Access-Control-Allow-Headers", "content-type, authorization");
+        headers.add("Access-Control-Allow-Headers", "content-type, Authorization");
         headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
     }
 }

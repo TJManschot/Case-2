@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import javax.crypto.spec.SecretKeySpec;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -40,7 +38,7 @@ public class TokenProvider {
         return token;
     }
 
-    private Key generateKey() {
+    Key generateKey() {
         byte[] key = "Spetter pieter pater, lekker in het water".getBytes();
         return new SecretKeySpec(key, 0, key.length, "DES");
     }
