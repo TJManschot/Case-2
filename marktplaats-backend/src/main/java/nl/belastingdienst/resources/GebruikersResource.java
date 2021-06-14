@@ -3,6 +3,7 @@ package nl.belastingdienst.resources;
 import nl.belastingdienst.database.GebruikerDao;
 import nl.belastingdienst.model.Gebruiker;
 import nl.belastingdienst.security.Wachtwoordverwerker;
+import nl.belastingdienst.utility.WachtwoordGenerator;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -25,6 +26,9 @@ public class GebruikersResource implements JsonResource {
     @Inject
     Wachtwoordverwerker wachtwoordverwerker;
 
+    @Inject
+    WachtwoordGenerator wachtwoordGenerator;
+
     @GET
     public List<Gebruiker> get() {
         log.info("Gebruikers worden opgehaald ...");
@@ -34,6 +38,8 @@ public class GebruikersResource implements JsonResource {
     @POST
     public Gebruiker post(Gebruiker gebruiker) {
         log.info("Gebruiker " + gebruiker.getGebruikersnaam() + " wordt geregistreerd ...");
+        gebruiker.setHash(wachtwoordGenerator.maakWachtwoord());
+        log.info(wachtwoordGenerator.getWachtwoord());
         gebruikerDao.add(gebruiker);
         return gebruiker;
     }
