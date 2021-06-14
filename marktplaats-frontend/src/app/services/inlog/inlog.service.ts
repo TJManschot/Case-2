@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Gebruiker} from '../models/gebruiker';
+import {Gebruiker} from '../../models/gebruiker';
 import {ReplaySubject, Subject} from 'rxjs';
 import {Inloggegevens} from '../../models/inloggegevens';
 
