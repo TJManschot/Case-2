@@ -38,6 +38,7 @@ public class GebruikersResource implements JsonResource {
     @POST
     public Gebruiker post(Gebruiker gebruiker) {
         log.info("Gebruiker " + gebruiker.getGebruikersnaam() + " wordt geregistreerd ...");
+        gebruiker.setAkkoordMetVoorwaarden(true);
         gebruiker.setHash(wachtwoordGenerator.maakWachtwoord());
         log.info(wachtwoordGenerator.getWachtwoord());
         gebruikerDao.add(gebruiker);
