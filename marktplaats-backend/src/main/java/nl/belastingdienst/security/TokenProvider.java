@@ -38,7 +38,7 @@ public class TokenProvider {
         return token;
     }
 
-    private Key generateKey() {
+    Key generateKey() {
         byte[] key = "Spetter pieter pater, lekker in het water".getBytes();
         return new SecretKeySpec(key, 0, key.length, "DES");
     }

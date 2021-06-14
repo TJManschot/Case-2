@@ -19,6 +19,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('LoggedIn') === 'true') {
+      this._loggedIn = true;
+    }
+    if (localStorage.getItem('LoggedIn') === 'false') {
+      this._loggedIn = false;
+    }
   }
 
 }
