@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AdvertentieModel} from "../../models/advertentie.model";
-import {AdvertentieService} from "../../services/advertentie.service";
+import {AdvertentieModel} from '../../models/advertentie.model';
+import {AdvertentieService} from '../../services/advertentie/advertentie.service';
 
 @Component({
   selector: 'app-advertentie',

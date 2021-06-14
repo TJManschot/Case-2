@@ -1,0 +1,29 @@
+<form>
+  <div>
+
+    <div>
+      <label for="advertentieTitel">Titel: </label>
+      <input class="form-control" formControlName="titel" id="advertentieTitel" type="text">
+    </div>
+
+    <div>
+      <label for="fileInput">Bestand: </label>
+      <input class="form-control" id="fileInput" type="file">
+    </div>
+
+    <div>
+      <label class="form-label" for="advertentieOmschrijving">Omschrijving: </label>
+      <textarea class="form-control" formControlName="omschrijving" id="advertentieOmschrijving" rows="3"></textarea>
+    </div>
+
+    <div>
+      <label class="form-label" for="advertentiePrijs">Prijs: </label>
+      <div class=" input-group ">
+        <span class="input-group-text">€</span>
+        <input class="form-control" formControlName="prijs" id="advertentiePrijs" type="text">
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary margin-top" type="submit">Aanmaken</button>
+</form>
+

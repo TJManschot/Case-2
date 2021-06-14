@@ -2,6 +2,6 @@ export interface AdvertentieModel {
   id: number;
   titel: string;
   img: string;
-  description: string;
+  omschrijving: string;
   prijs: number;
 }

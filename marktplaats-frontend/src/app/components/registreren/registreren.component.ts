@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Gebruiker} from "../../models/gebruiker";
+import {Gebruiker} from '../../models/gebruiker';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {GebruikerService} from "../../services/gebruiker.service";
-import {Bezorgwijzen} from "../../models/bezorgwijzen";
+import {GebruikerService} from '../../services/gebruiker/gebruiker.service';
+import {Bezorgwijzen} from '../../models/bezorgwijzen';
 
 @Component({
   selector: 'app-signup',
