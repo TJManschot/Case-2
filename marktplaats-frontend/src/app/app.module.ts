@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { LoguitComponent } from './components/loguit/loguit.component';
 import { AdvertentieFormComponent } from './components/advertentie-form/advertentie-form.component';
 import {AdvertentieAanmakenPagina} from './pages/advertentie-aanmaken-pagina/advertentie-aanmaken.pagina';
+import {GemeenschapPagina} from './pages/gemeenschap-pagina/gemeenschap.pagina';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {AdvertentieAanmakenPagina} from './pages/advertentie-aanmaken-pagina/adv
     AdresVragenComponent,
     LoguitComponent,
     AdvertentieFormComponent,
-    AdvertentieAanmakenPagina
+    AdvertentieAanmakenPagina,
+    GemeenschapPagina
     ],
   imports: [
     BrowserModule,

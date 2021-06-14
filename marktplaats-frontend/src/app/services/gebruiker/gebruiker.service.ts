@@ -16,43 +16,26 @@ const httpOptions = {
 })
 export class GebruikerService {
   private url = 'http://localhost:9080/marktplaats/api/gebruikers';
-  private gebruikerSubject = new Subject<Gebruiker[]>();
+  // tslint:disable-next-line:variable-name
+  private _gebruikers$ = new Subject<Gebruiker[]>();
 
   constructor(private http: HttpClient) { }
 
   addGebruiker(nieuweGebruiker: Gebruiker){
     nieuweGebruiker = this.bezorgwijzenFix(nieuweGebruiker);
-    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe(() => this.getGebruiker());
+    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe(() => this.getGebruikers());
   }
 
-  getGebruiker(): Observable<Gebruiker[]> {
-    this.http.get<Gebruiker[]>(this.url).subscribe(gebruiker => {
-      this.gebruikerSubject.next(gebruiker);
+  getGebruikers(): Observable<Gebruiker[]> {
+    this.http.get<Gebruiker[]>(this.url).subscribe(gebruikers => {
+      this._gebruikers$.next(gebruikers);
     });
-    return this.gebruikerSubject;
+    return this._gebruikers$;
   }
 
-  adres: Adres = {
-    straat: 'Kees van Dongenpad',
-    huisnummer: '59',
-    postcode: '1112WZ',
-    stad: 'Diemen'
-  };
-
-
-  private gebruikers: Gebruiker[] = [
-    {
-      id: 0,
-      gebruikersnaam: 'Richardson',
-      email: 'jay.richardson@outlook.com',
-      wachtwoord: 'Wachtwoord',
-      adres: this.adres,
-      bezorgwijzen: [Bezorgwijzen.MAGAZIJN, Bezorgwijzen.VERSTUREN]
-    }
-  ];
-
-  getGebruikers(): Gebruiker[] {
-    return this.gebruikers;
+  get gebruikers(): Subject<Gebruiker[]> {
+    this.getGebruikers();
+    return this._gebruikers$;
   }
 
   // addGebruiker(nieuweGebruiker: Gebruiker) {
