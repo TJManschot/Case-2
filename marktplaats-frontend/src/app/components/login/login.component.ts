@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {InlogService} from '../../services/inlog.service';
+import {InlogService} from '../../services/inlog/inlog.service';
 import {Subject} from 'rxjs';
 
 @Component({

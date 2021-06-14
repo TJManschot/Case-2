@@ -18,6 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdresVragenComponent} from './components/adres-vragen/adres-vragen.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LoguitComponent } from './components/loguit/loguit.component';
+import { AdvertentieFormComponent } from './components/advertentie-form/advertentie-form.component';
+import {AdvertentieAanmakenPagina} from './pages/advertentie-aanmaken-pagina/advertentie-aanmaken.pagina';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,10 @@ import { LoguitComponent } from './components/loguit/loguit.component';
     NewUserPagina,
     SignupComponent,
     AdresVragenComponent,
-    LoguitComponent],
+    LoguitComponent,
+    AdvertentieFormComponent,
+    AdvertentieAanmakenPagina
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

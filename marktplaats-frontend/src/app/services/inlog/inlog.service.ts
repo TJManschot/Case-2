@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Gebruiker} from '../models/gebruiker';
 import {ReplaySubject, Subject} from 'rxjs';
-import {Inloggegevens} from '../models/inloggegevens';
+import {Inloggegevens} from '../../models/inloggegevens';
 
 @Injectable({
   providedIn: 'root'
@@ -32,22 +32,20 @@ export class InlogService {
   }
 
   login(inloggegevens: Inloggegevens): void {
-    console.log(inloggegevens.gebruikersnaam + ' probeert in te loggen.');
-    this.http.post<Gebruiker>(this.uri, inloggegevens, {
-      observe: 'response',
+    const header = {
       headers: new HttpHeaders()
         .set('Authorization',  `Basic ` + inloggegevens.gebruikersnaam + ':' + inloggegevens.wachtwoord)
-    })
+    };
+    console.log(inloggegevens.gebruikersnaam + ' probeert in te loggen.');
+    this.http.post<Gebruiker>(this.uri, inloggegevens, header)
       .subscribe(
         response => this.handleHappyLogin(response),
         response => this.handleLoginError(response)
       );
   }
-  handleHappyLogin(response: HttpResponse<Gebruiker>) {
-    const gebruiker = response.body;
+  handleHappyLogin(gebruiker: Gebruiker) {
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
-    console.log(response);
-    localStorage.setItem('Token', response.headers.get('Authorization').substring(7));
+    localStorage.setItem('LoggedIn', 'true');
     this._loggedIn$.next(true);
     this._gebruiker$.next(gebruiker);
   }

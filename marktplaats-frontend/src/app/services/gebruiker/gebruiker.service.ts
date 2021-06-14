@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Gebruiker} from '../models/gebruiker';
-import {Adres} from '../models/adres';
-import {Bezorgwijzen} from '../models/bezorgwijzen';
+import {Gebruiker} from '../../models/gebruiker';
+import {Adres} from '../../models/adres';
+import {Bezorgwijzen} from '../../models/bezorgwijzen';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
