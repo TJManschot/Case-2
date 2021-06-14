@@ -1,9 +1,11 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div *ngFor="let ad of advertenties" class="col">
+  <div *ngFor="let ad of advertenties" class="col w-25">
+    <div class="card-header">
+      {{ad.titel}}
+    </div>
     <div class="card h-100">
-      <img class="card-img-top" src="{{ad.afbeelding}}">
+      <img class="card-img-top rounded mx-auto d-block" src="{{ad.afbeelding}}">
       <div class="card-body">
-        <h5 class="card-title">{{ad.titel}}</h5>
         <p class="card-text">{{ad.omschrijving}}</p>
       </div>
       <div class="card-footer">
