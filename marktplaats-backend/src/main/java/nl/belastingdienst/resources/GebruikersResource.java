@@ -2,6 +2,7 @@ package nl.belastingdienst.resources;
 
 import nl.belastingdienst.database.GebruikerDao;
 import nl.belastingdienst.model.Gebruiker;
+import nl.belastingdienst.security.Authorized;
 import nl.belastingdienst.security.TokenProvider;
 import nl.belastingdienst.security.Wachtwoordverwerker;
 import nl.belastingdienst.utility.WachtwoordGenerator;
@@ -38,7 +39,7 @@ public class GebruikersResource implements JsonResource {
     @Context
     private UriInfo uriInfo;
 
-    @GET
+    @GET @Authorized
     public List<Gebruiker> get() {
         log.info("Gebruikers worden opgehaald ...");
         return gebruikerDao.get();

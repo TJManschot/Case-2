@@ -16,11 +16,12 @@ import {NewUserPagina} from './pages/new-user-pagina/new-user.pagina';
 import {SignupComponent} from './components/registreren/registreren.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdresVragenComponent} from './components/adres-vragen/adres-vragen.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { LoguitComponent } from './components/loguit/loguit.component';
 import { AdvertentieFormComponent } from './components/advertentie-form/advertentie-form.component';
 import {AdvertentieAanmakenPagina} from './pages/advertentie-aanmaken-pagina/advertentie-aanmaken.pagina';
 import {GemeenschapPagina} from './pages/gemeenschap-pagina/gemeenschap.pagina';
+import {TokenInterceptor} from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,9 @@ import {GemeenschapPagina} from './pages/gemeenschap-pagina/gemeenschap.pagina';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
