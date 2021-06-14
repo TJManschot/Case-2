@@ -5,6 +5,7 @@ import {AdvertentieModel} from '../../models/advertentie.model';
   providedIn: 'root'
 })
 export class AdvertentieService {
+  private url = 'http://localhost:9080/marktplaats/api/gebruikers';
 
   private advertenties: AdvertentieModel[] = [
     {
@@ -50,6 +51,10 @@ export class AdvertentieService {
 
   getAdvertenties(): AdvertentieModel[] {
     return this.advertenties;
+  }
+
+  addAdvertentie(advertentie: AdvertentieModel){
+    this.advertenties.push(advertentie);
   }
 }
 

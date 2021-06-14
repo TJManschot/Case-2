@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   ophalenChecked: boolean = false;
 
   // @ts-ignore
-  gebruikerForm: FormGroup
+  gebruikerForm: FormGroup;
   adresForm: FormGroup | undefined;
 
   constructor(
@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
       huisnummer: [''],
       postcode: [''],
       stad: ['']
-    })
+    });
     this.gebruikerForm = this.fb.group({
       gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
       email: ['', [Validators.required, emailValidator]],

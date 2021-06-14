@@ -1,4 +1,4 @@
-<form>
+<form (submit)="addAdvertentie()" [formGroup]="advertentieForm">
   <div>
 
     <div>
@@ -8,7 +8,7 @@
 
     <div>
       <label for="fileInput">Bestand: </label>
-      <input class="form-control" id="fileInput" type="file">
+      <input class="form-control" formControlName="img" id="fileInput" type="file">
     </div>
 
     <div>
