@@ -46,7 +46,6 @@ export class InlogService {
   handleHappyLogin(response: HttpResponse<Gebruiker>) {
     const gebruiker = response.body;
     console.log(`Gebruiker ${gebruiker.gebruikersnaam} is ingelogd.`);
-    console.log(response);
     localStorage.setItem('Token', response.headers.get('Authorization').substring(7));
     this._loggedIn$.next(true);
     this._gebruiker$.next(gebruiker);
