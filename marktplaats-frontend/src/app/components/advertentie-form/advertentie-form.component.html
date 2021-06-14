@@ -7,8 +7,14 @@
     </div>
 
     <div>
-      <label for="fileInput">Bestand: </label>
-      <input class="form-control" formControlName="img" id="fileInput" type="file">
+      <label>Selecteer afbeelding:</label>
+      <div>
+        <input formControlName="afbeelding"
+               #imageInput
+               accept="image/*"
+               type="file"
+               (change)="onImageChange($event)">
+      </div>
     </div>
 
     <div>
