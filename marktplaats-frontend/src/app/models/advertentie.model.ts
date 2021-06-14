@@ -5,5 +5,5 @@ export interface AdvertentieModel {
   img: string;
   omschrijving: string;
   prijs: number;
-  afbeelding: File;
+  afbeelding: number[];
 }

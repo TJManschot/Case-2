@@ -30,6 +30,7 @@ export class AdvertentieFormComponent implements OnInit {
 
     if (e.target.files && e.target.files.length) {
       const [file] = e.target.files;
+
       reader.readAsDataURL(file);
 
       reader.onload = () => {

@@ -1,11 +1,21 @@
 import {Injectable} from '@angular/core';
 import {AdvertentieModel} from '../../models/advertentie.model';
+import {Gebruiker} from '../../models/gebruiker';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdvertentieService {
-  private url = 'http://localhost:9080/marktplaats/api/gebruikers';
+  private url = 'http://localhost:9080/marktplaats/api/advertenties';
+  private advertentieSubject = new Subject<AdvertentieModel[]>();
 
   private advertenties: AdvertentieModel[] = [
     // {
@@ -45,17 +55,22 @@ export class AdvertentieService {
     // }
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
 
-  getAdvertenties(): AdvertentieModel[] {
-    return this.advertenties;
+  getAdvertenties(): Subject<AdvertentieModel[]>{
+     this.http.get<AdvertentieModel[]>(this.url) // get contacts from server
+      .subscribe(                      // when the results arrive (some time in the future):
+        ad => this.advertentieSubject.next(ad)
+      );
+     return this.advertentieSubject;
   }
 
   addAdvertentie(advertentie: AdvertentieModel){
-    this.advertenties.push(advertentie);
-  }
+    // this.advertenties.push(advertentie);
+      this.http.post<Gebruiker>(this.url, advertentie, httpOptions).subscribe(() => this.getAdvertenties());
+    }
 }
 
 
