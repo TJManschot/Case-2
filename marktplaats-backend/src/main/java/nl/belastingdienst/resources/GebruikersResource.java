@@ -40,7 +40,7 @@ public class GebruikersResource implements JsonResource {
         log.info("Gebruiker " + gebruiker.getGebruikersnaam() + " wordt geregistreerd ...");
         gebruiker.setAkkoordMetVoorwaarden(true);
         gebruiker.setHash(wachtwoordGenerator.maakWachtwoord());
-        log.info(wachtwoordGenerator.getWachtwoord());
+        log.info("Het wachtwoord is: " + wachtwoordGenerator.getWachtwoord());
         gebruikerDao.add(gebruiker);
         return gebruiker;
     }
