@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.gebruikers = this.gebruikerService.getGebruikers();
+    this.gebruikerService.getGebruikers().subscribe(gebruikers => this.gebruikers = gebruikers);
     this.adresForm = this.fb.group({
       straatnaam: [''],
       huisnummer: [''],
