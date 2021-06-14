@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import javax.crypto.spec.SecretKeySpec;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
