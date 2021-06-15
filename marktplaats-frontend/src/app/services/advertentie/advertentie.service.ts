@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import {AdvertentieModel} from '../../models/advertentie.model';
 import {Gebruiker} from '../../models/gebruiker';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
+import {Hoofdcategorie} from '../../models/hoofdcategorie';
+import {Categorie} from '../../models/categorie';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,48 +18,24 @@ const httpOptions = {
 export class AdvertentieService {
   private url = 'http://localhost:9080/marktplaats/api/advertenties';
   private advertentieSubject = new Subject<AdvertentieModel[]>();
-
-  private advertenties: AdvertentieModel[] = [
-    // {
-    //   id: 0,
-    //   titel: 'Cool Blue',
-    //   omschrijving: 'Cool Blue Cameralenzen',
-    //   img: 'https://cdn.frankwatching.com/app/uploads/2020/05/Coolblue_add-Message-Match.png',
-    //   prijs: 9.99
-    // },
-    // {
-    //   id: 1,
-    //   titel: 'Anwb',
-    //   omschrijving: 'Wegenwacht Nederland instap \nDeskundige pechhulp in Nederland',
-    //   img: 'https://www.vormenvrij.nl/wp-content/uploads/bfi_thumb/advertentiewwamersfoort-njx9q8zxu8ze6hunua6jy0akl7wtzajl6id33ioi50.jpg',
-    //   prijs: 45
-    // },
-    // {
-    //   id: 2,
-    //   titel: 'Google Advertenties',
-    //   omschrijving: 'Nieuwe google advertenties',
-    //   img: 'https://www.smartdata.agency/wp-content/uploads/nieuwe-google-advertenties.png',
-    //   prijs: 60
-    // },
-    // {
-    //   id: 3,
-    //   titel: 'Jumbo Hallo laagste prijsgarantie',
-    //   omschrijving: 'Dag boeren \nDag diversiteit \nDag weidevogels',
-    //   img: 'https://graphicalert.com/wp-content/uploads/2017/04/Dagblad-De-Pers-Milieudefensie-Jumbo-melk-advertentie-campagne-graphic-alert-act-impact.jpg',
-    //   prijs: 1.06
-    // },
-    // {
-    //   id: 4,
-    //   titel: 'Jumbo allerbeste supermarkt',
-    //   omschrijving: 'Hebben we ook eens de hoogste prijs',
-    //   img: 'https://www.rtlnieuws.nl/sites/default/files/styles/staand/public/content/images/2021/01/21/Schermafbeelding%202021-01-21%20om%2014.01.54.png?itok=99SBzAva',
-    //   prijs: 1.06
-    // }
-  ];
+  // tslint:disable-next-line:variable-name
+  private _soorten$ = new Subject<string[]>();
+  // tslint:disable-next-line:variable-name
+  private _hoofdcategorieen$ = new Subject<Hoofdcategorie[]>();
+  // tslint:disable-next-line:variable-name
+  private _categorieen$ = new Subject<Categorie[]>();
 
   constructor(private http: HttpClient) {
   }
-
+  get soorten$(): Subject<string[]> {
+    return this._soorten$;
+  }
+  get hoofdcategorieen$(): Subject<Hoofdcategorie[]> {
+    return this._hoofdcategorieen$;
+  }
+  get categorieen$(): Subject<Categorie[]> {
+    return this._categorieen$;
+  }
 
   getAdvertenties(): Subject<AdvertentieModel[]>{
      this.http.get<AdvertentieModel[]>(this.url) // get contacts from server
@@ -71,6 +49,24 @@ export class AdvertentieService {
     // this.advertenties.push(advertentie);
       this.http.post<Gebruiker>(this.url, advertentie, httpOptions).subscribe(() => this.getAdvertenties());
     }
+  getSoorten(): void {
+    this.http.get<string[]> (this.url + '/soorten')
+      .subscribe(
+        soorten => this._soorten$.next(soorten)
+      );
+  }
+  getHoofdcategorieen(): void {
+    this.http.get<Hoofdcategorie[]> (this.url + '/hoofdcategorieen')
+      .subscribe(
+        hoofdcategorieen => this._hoofdcategorieen$.next(hoofdcategorieen)
+      );
+  }
+  getCategorieen(): void {
+    this.http.get<Categorie[]> (this.url + '/categorieen')
+      .subscribe(
+        categorieen => this._categorieen$.next(categorieen)
+      );
+  }
 }
 
 

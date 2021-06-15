@@ -1,4 +1,4 @@
-import {Soort} from './soort';
+import {Categorie} from './categorie';
 
 export interface AdvertentieModel {
   id: number;
@@ -7,7 +7,6 @@ export interface AdvertentieModel {
   omschrijving: string;
   prijs: number;
   afbeelding: number[];
-  soort: Soort;
-  hoofdcategorie: string;
-  categorie: string;
+  soort: string;
+  categorie: Categorie;
 }

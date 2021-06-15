@@ -46,7 +46,6 @@ public class Advertentie {
         this.titel = titel;
     }
 
-
     public String getOmschrijving() {
         return omschrijving;
     }
@@ -61,5 +60,21 @@ public class Advertentie {
 
     public void setPrijs(BigDecimal prijs) {
         this.prijs = prijs;
+    }
+
+    public Soort getSoort() {
+        return soort;
+    }
+
+    public void setSoort(Soort soort) {
+        this.soort = soort;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
 }

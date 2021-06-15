@@ -17,30 +17,26 @@
       </div>
     </div>
 
+
     <div class="btn-group mr-3">
-      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-        <button class="btn btn-outline-primary" ngbDropdownToggle>Soort</button>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <button ngbDropdownItem>Vraag</button>
-          <button ngbDropdownItem>Aanbod</button>
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button type="button" (click)="getSoorten()" class="btn btn-outline-primary" ngbDropdownToggle>{{this.soortTekst}}</button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button type="button" (click)="kiesSoort(s)" ngbDropdownItem *ngFor="let s of soorten">{{s}}</button>
+          </div>
         </div>
-      </div>
-
-      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-        <button class="btn btn-outline-primary" ngbDropdownToggle>Hoofdcategorie</button>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <button ngbDropdownItem>Product</button>
-          <button ngbDropdownItem>Dienst</button>
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button type="button" (click)="getHoofdcategorieen()" class="btn btn-outline-primary" ngbDropdownToggle>{{this.hoofdcategorieTekst}}</button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button type="button" (click)="kiesHoofdcategorie(h)" ngbDropdownItem *ngFor="let h of hoofdcategorieen">{{h.naam}}</button>
+          </div>
         </div>
-      </div>
-
-      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-        <button class="btn btn-outline-primary" ngbDropdownToggle>Categorie</button>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <button ngbDropdownItem>Bloemen</button>
-          <button ngbDropdownItem>Broeken</button>
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>{{this.categorieTekst}}</button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button type="button" (click)="kiesCategorie(c)" ngbDropdownItem *ngFor="let c of categorieen">{{c.naam}}</button>
+          </div>
         </div>
-      </div>
     </div>
 
     <div>
@@ -58,6 +54,7 @@
   </div>
 
   <button class="btn btn-primary margin-top" type="submit">Aanmaken</button>
+  {{this.advertentieForm.value | json}}
 </form>
 
 
