@@ -4,7 +4,6 @@ import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validat
 import {GebruikerService} from '../../services/gebruiker/gebruiker.service';
 import {Bezorgwijzen} from '../../models/bezorgwijzen';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-signup',

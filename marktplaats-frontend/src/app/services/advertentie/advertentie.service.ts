@@ -38,15 +38,14 @@ export class AdvertentieService {
   }
 
   getAdvertenties(): Subject<AdvertentieModel[]>{
-     this.http.get<AdvertentieModel[]>(this.url) // get contacts from server
-      .subscribe(                      // when the results arrive (some time in the future):
+     this.http.get<AdvertentieModel[]>(this.url)
+      .subscribe(
         ad => this.advertentieSubject.next(ad)
       );
      return this.advertentieSubject;
   }
 
   addAdvertentie(advertentie: AdvertentieModel){
-    // this.advertenties.push(advertentie);
       this.http.post<Gebruiker>(this.url, advertentie, httpOptions).subscribe(() => this.getAdvertenties());
     }
   getSoorten(): void {

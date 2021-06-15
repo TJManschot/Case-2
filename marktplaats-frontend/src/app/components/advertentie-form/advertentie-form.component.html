@@ -6,9 +6,9 @@
       <input class="form-control" formControlName="titel" id="advertentieTitel" type="text">
     </div>
 
-    <div>
+    <div class="margin-top">
       <label>Selecteer afbeelding:</label>
-      <div>
+      <div class="margin-top">
         <input formControlName="afbeelding"
                #imageInput
                accept="image/*"
@@ -18,7 +18,7 @@
     </div>
 
 
-    <div class="btn-group mr-3">
+    <div class="btn-group mr-3 margin-top">
         <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
           <button type="button" (click)="getSoorten()" class="btn btn-outline-primary" ngbDropdownToggle>{{this.soortTekst}}</button>
           <div class="dropdown-menu" ngbDropdownMenu>
@@ -40,12 +40,12 @@
     </div>
 
     <div>
-      <label class="form-label" for="advertentieOmschrijving">Omschrijving: </label>
+      <label class="form-label margin-top" for="advertentieOmschrijving">Omschrijving: </label>
       <textarea class="form-control" formControlName="omschrijving" id="advertentieOmschrijving" rows="3"></textarea>
     </div>
 
     <div>
-      <label class="form-label" for="advertentiePrijs">Prijs: </label>
+      <label class="form-label margin-top" for="advertentiePrijs">Prijs: </label>
       <div class=" input-group ">
         <span class="input-group-text">€</span>
         <input class="form-control" formControlName="prijs" id="advertentiePrijs" type="text">
