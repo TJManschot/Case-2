@@ -8,4 +8,5 @@ public interface GebruikerDao {
     List<Gebruiker> get();
     List<Gebruiker> getByGebruikersnaam(String gebruikersnaam);
     void add(Gebruiker gebruiker);
+    void patch(Gebruiker gebruiker);
 }

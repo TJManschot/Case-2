@@ -1,0 +1,18 @@
+<form (submit)="wijzigGegevensGebruiker()" [formGroup]="gebruikerForm" id="reactive-form" novalidate>
+  <div class="form-group">
+    <label for="GebruikersnaamInput">Gebruikersnaam: </label>
+    <input class="form-control" formControlName="gebruikersnaam" id="GebruikersnaamInput" type="text" placeholder="{{gebruiker.gebruikersnaam}}">
+    <!--      TODO validators-->
+  </div>
+  <div class="form-group">
+    <label for="EmailInput">Email</label>
+    <input class="form-control" formControlName="email" id="EmailInput" type="email" placeholder="{{gebruiker.email}}">
+    <!--      TODO validators-->
+  </div>
+  <div class="form-group">
+    <label for="WachtwoordInput">Wachtwoord</label>
+    <input class="form-control" formControlName="tempPassword" id="WachtwoordInput" type="password">
+    <!--      TODO validators-->
+  </div>
+  <button class="btn btn-primary margin-top" type="submit" >Wijzigen</button>
+</form>

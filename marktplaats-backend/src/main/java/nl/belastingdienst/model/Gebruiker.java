@@ -10,6 +10,7 @@ public class Gebruiker {
     private long id;
     private String gebruikersnaam;
     private String hash;
+    private String tempPassword;
     private String email;
     @Embedded
     private Adres adres;
@@ -75,5 +76,13 @@ public class Gebruiker {
 
     public void addBezorgwijzen(Bezorgwijzen bezorgwijze){
         this.bezorgwijzen.add(bezorgwijze);
+    }
+
+    public String getTempPassword() {
+        return tempPassword;
+    }
+
+    public void setTempPassword(String tempPassword) {
+        this.tempPassword = tempPassword;
     }
 }

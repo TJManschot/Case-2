@@ -9,8 +9,7 @@
         <div aria-labelledby="dropdownForm1" ngbDropdownMenu>
           <div ngbDropdownItem>Profielbeheer</div>
           <div class="dropdown-divider"></div>
-          <button ngbDropdownItem>Account aanpassen</button>
-          <button ngbDropdownItem>Account verwijderen</button>
+          <button [routerLink]="['gebruiker/',gebruikersnaam]" ngbDropdownItem>Account aanpassen</button>
           <button [routerLink]="['advertentie/aanmaken']" ngbDropdownItem>Advertentie aanmaken</button>
           <app-loguit></app-loguit>
         </div>

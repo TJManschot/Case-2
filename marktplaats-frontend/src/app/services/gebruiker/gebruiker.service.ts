@@ -22,7 +22,13 @@ export class GebruikerService {
 
   addGebruiker(nieuweGebruiker: Gebruiker){
     nieuweGebruiker = this.bezorgwijzenFix(nieuweGebruiker);
-    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe(() => this.getGebruikers());
+    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe();
+    // () => this.getGebruikers()
+  }
+
+  patchGebruiker(updateGebruiker: Gebruiker, gebruikersnaam: string){
+    console.log('Gebruiker: ' + gebruikersnaam + ' wordt gewijzigd. ');
+    return this.http.patch<Gebruiker>(`${this.url}/${gebruikersnaam}`, updateGebruiker).subscribe();
   }
 
   getGebruikers(): Observable<Gebruiker[]> {
@@ -36,11 +42,6 @@ export class GebruikerService {
     this.getGebruikers();
     return this._gebruikers$;
   }
-
-  // addGebruiker(nieuweGebruiker: Gebruiker) {
-  //   nieuweGebruiker = this.bezorgwijzenFix(nieuweGebruiker);
-  //   this.gebruikers.push(nieuweGebruiker);
-  // }
 
   bezorgwijzenFix(g: Gebruiker): Gebruiker {
     const bezorgwijzenArrayFix: Bezorgwijzen[] = [];

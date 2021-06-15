@@ -3,16 +3,14 @@ package nl.belastingdienst.resources;
 import nl.belastingdienst.database.GebruikerDao;
 import nl.belastingdienst.model.Gebruiker;
 import nl.belastingdienst.security.Authorized;
+import nl.belastingdienst.security.EncryptionStrategy;
 import nl.belastingdienst.security.TokenProvider;
 import nl.belastingdienst.security.Wachtwoordverwerker;
 import nl.belastingdienst.utility.WachtwoordGenerator;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -45,12 +43,44 @@ public class GebruikersResource implements JsonResource {
         return gebruikerDao.get();
     }
 
+    @GET @Path("/{gebruikersnaam}")
+    public Gebruiker getGebruiker(@PathParam("gebruikersnaam") String gebruikersnaam){
+        log.info("Gebruiker wordt gezocht in database.");
+        return gebruikerDao.getByGebruikersnaam(gebruikersnaam).get(0);
+    }
+
+
+    @PATCH @Path("/{gebruikersnaam}")
+    public Gebruiker patch(@PathParam("gebruikersnaam") String gebruikersnaam, Gebruiker updateGebruiker){
+        Gebruiker gebruiker = getGebruiker(gebruikersnaam);
+        log.info("Gebruiker: " + gebruikersnaam + " wordt aangepast ... " );
+
+        if(updateGebruiker.getGebruikersnaam() != null && !updateGebruiker.getGebruikersnaam().isBlank()){
+            gebruiker.setGebruikersnaam(updateGebruiker.getGebruikersnaam());
+        }
+        if(updateGebruiker.getEmail() != null && !updateGebruiker.getEmail().isBlank()){
+            gebruiker.setEmail(updateGebruiker.getEmail());
+        }
+        if(updateGebruiker.getTempPassword() != null && !updateGebruiker.getTempPassword().isBlank()){
+            log.info("wachtwoord wordt gewijzigd");
+            gebruiker.setHash(new EncryptionStrategy().encrypt(updateGebruiker.getTempPassword()));
+            gebruiker.setTempPassword(null);
+        } else {
+            log.debug(updateGebruiker.getTempPassword());
+        }
+
+        gebruikerDao.patch(gebruiker);
+        return gebruiker;
+    }
+
+
     @POST
     public Gebruiker post(Gebruiker gebruiker) {
         log.info("Gebruiker " + gebruiker.getGebruikersnaam() + " wordt geregistreerd ...");
         gebruiker.setAkkoordMetVoorwaarden(true);
         gebruiker.setHash(wachtwoordGenerator.maakWachtwoord());
         log.info("Het wachtwoord is: " + wachtwoordGenerator.getWachtwoord());
+        gebruiker.setTempPassword(wachtwoordGenerator.getWachtwoord());
         gebruikerDao.add(gebruiker);
         return gebruiker;
     }

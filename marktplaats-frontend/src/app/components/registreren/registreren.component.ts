@@ -3,11 +3,14 @@ import {Gebruiker} from '../../models/gebruiker';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {GebruikerService} from '../../services/gebruiker/gebruiker.service';
 import {Bezorgwijzen} from '../../models/bezorgwijzen';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './registreren.component.html',
-  styleUrls: ['./registreren.component.css']
+  styleUrls: ['./registreren.component.css'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class SignupComponent implements OnInit {
   gebruikers: Gebruiker[] = [];
@@ -16,7 +19,7 @@ export class SignupComponent implements OnInit {
   get ordersFormArray() {
     return this.gebruikerForm.controls.bezorgwijzen as FormArray;
   }
-  ophalenChecked: boolean = false;
+  ophalenChecked = false;
 
   // @ts-ignore
   gebruikerForm: FormGroup;
@@ -25,8 +28,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private gebruikerService: GebruikerService
-  ) {
-  }
+  ) {}
 
 
   ngOnInit(): void {
@@ -65,7 +67,10 @@ export class SignupComponent implements OnInit {
     this.gebruikerService.addGebruiker(this.gebruikerForm.value);
     console.log(this.gebruikerForm.value);
   }
+
 }
+
+
 
 
 function emailValidator(control: AbstractControl) {
@@ -75,4 +80,5 @@ function emailValidator(control: AbstractControl) {
   const regex = /^.+@.+\.[a-zA-Z]+$/;
   return regex.test(control.value) ? null : {email: {valid: false}};
 }
+
 

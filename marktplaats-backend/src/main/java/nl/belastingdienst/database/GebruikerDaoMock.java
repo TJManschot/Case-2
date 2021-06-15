@@ -34,8 +34,18 @@ public class GebruikerDaoMock implements GebruikerDao {
         return result;
     }
 
+//    @Override
+//    public Gebruiker getGebruikerPassword(String gebruikersnaam) {
+//        return null;
+//    }
+
     @Override
     public void add(Gebruiker gebruiker) {
         gebruikers.add(gebruiker);
+    }
+
+    @Override
+    public void patch(Gebruiker gebruiker) {
+
     }
 }

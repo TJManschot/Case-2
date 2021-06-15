@@ -9,4 +9,5 @@ export interface Gebruiker {
   akkoordMetVoorwaarden?: boolean;
   adres: Adres;
   bezorgwijzen: Bezorgwijzen[];
+  tempPassword: string;
 }

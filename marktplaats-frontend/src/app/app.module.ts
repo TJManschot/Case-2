@@ -22,6 +22,8 @@ import { AdvertentieFormComponent } from './components/advertentie-form/adverten
 import {AdvertentieAanmakenPagina} from './pages/advertentie-aanmaken-pagina/advertentie-aanmaken.pagina';
 import {GemeenschapPagina} from './pages/gemeenschap-pagina/gemeenschap.pagina';
 import {TokenInterceptor} from './interceptors/token.interceptor';
+import { GegevensFormComponent } from './components/gegevens-form/gegevens-form.component';
+import { GegevensWijzigenComponent } from './pages/gegevens-wijzigen/gegevens-wijzigen.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
     LoguitComponent,
     AdvertentieFormComponent,
     AdvertentieAanmakenPagina,
-    GemeenschapPagina
+    GemeenschapPagina,
+    GegevensFormComponent,
+    GegevensWijzigenComponent
     ],
   imports: [
     BrowserModule,
