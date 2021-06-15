@@ -14,6 +14,11 @@ public class Advertentie {
     private String omschrijving;
     private BigDecimal prijs;
 
+    @Enumerated(EnumType.STRING)
+    private Soort soort;
+    @ManyToOne
+    private Categorie categorie;
+
     @Lob
     private String afbeelding;
 

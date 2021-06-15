@@ -17,6 +17,32 @@
       </div>
     </div>
 
+    <div class="btn-group mr-3">
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button class="btn btn-outline-primary" ngbDropdownToggle>Soort</button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem>Vraag</button>
+          <button ngbDropdownItem>Aanbod</button>
+        </div>
+      </div>
+
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button class="btn btn-outline-primary" ngbDropdownToggle>Hoofdcategorie</button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem>Product</button>
+          <button ngbDropdownItem>Dienst</button>
+        </div>
+      </div>
+
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button class="btn btn-outline-primary" ngbDropdownToggle>Categorie</button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem>Bloemen</button>
+          <button ngbDropdownItem>Broeken</button>
+        </div>
+      </div>
+    </div>
+
     <div>
       <label class="form-label" for="advertentieOmschrijving">Omschrijving: </label>
       <textarea class="form-control" formControlName="omschrijving" id="advertentieOmschrijving" rows="3"></textarea>
@@ -30,6 +56,7 @@
       </div>
     </div>
   </div>
+
   <button class="btn btn-primary margin-top" type="submit">Aanmaken</button>
 </form>
 
