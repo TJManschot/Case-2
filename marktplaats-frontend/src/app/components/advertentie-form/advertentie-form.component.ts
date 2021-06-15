@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdvertentieModel} from '../../models/advertentie.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AdvertentieService} from '../../services/advertentie/advertentie.service';
+import {Soort} from '../../models/soort';
 
 @Component({
   selector: 'app-advertentie-form',
@@ -21,7 +22,10 @@ export class AdvertentieFormComponent implements OnInit {
       titel: [''],
       afbeelding: [''],
       omschrijving: [''],
-      prijs: ['']
+      prijs: [''],
+      soort: Soort.AANBOD,
+      hoofdcategorie: [''],
+      categorie: [''],
     });
   }
 

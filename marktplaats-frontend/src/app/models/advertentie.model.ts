@@ -1,3 +1,4 @@
+import {Soort} from './soort';
 
 export interface AdvertentieModel {
   id: number;
@@ -6,4 +7,7 @@ export interface AdvertentieModel {
   omschrijving: string;
   prijs: number;
   afbeelding: number[];
+  soort: Soort;
+  hoofdcategorie: string;
+  categorie: string;
 }

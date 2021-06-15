@@ -1,6 +1,9 @@
 package nl.belastingdienst.database;
 
 import nl.belastingdienst.model.Advertentie;
+import nl.belastingdienst.model.Categorie;
+import nl.belastingdienst.model.Hoofdcategorie;
+import nl.belastingdienst.model.Soort;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,5 +26,20 @@ public class AdvertentieDaoImpl implements AdvertentieDao {
     @Override
     public void add(Advertentie advertentie) {
         em.persist(advertentie);
+    }
+
+    @Override
+    public List<Soort> getSoorten() {
+        return List.of(Soort.values());
+    }
+
+    @Override
+    public List<Hoofdcategorie> getHoofdcategorieen() {
+        return em.createQuery("SELECT c FROM Hoofdcategorie c", Hoofdcategorie.class).getResultList();
+    }
+
+    @Override
+    public List<Categorie> getCategorieen() {
+        return em.createQuery("SELECT c FROM Categorie c", Categorie.class).getResultList();
     }
 }

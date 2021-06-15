@@ -4,6 +4,8 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import nl.belastingdienst.database.AdvertentieDao;
 import nl.belastingdienst.model.Advertentie;
@@ -30,5 +32,29 @@ public class AdvertentieResource implements JsonResource{
         log.info("Advertentie " + ad.getId() + " wordt geregistreerd ..." );
         advertentieDao.add(ad);
         return ad;
+    }
+
+    @GET @Path("soorten")
+    public Response getSoorten() {
+        return Response.status(200)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity(advertentieDao.getSoorten())
+                .build();
+    }
+
+    @GET @Path("hoofdcategorieen")
+    public Response getHoofdcategorieen() {
+        return Response.status(200)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity(advertentieDao.getHoofdcategorieen())
+                .build();
+    }
+
+    @GET @Path("categorieen")
+    public Response getCategorieen() {
+        return Response.status(200)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity(advertentieDao.getCategorieen())
+                .build();
     }
 }
