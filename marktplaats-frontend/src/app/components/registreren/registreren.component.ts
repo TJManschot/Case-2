@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
   gebruikers: Gebruiker[] = [];
   bezorgwijzen = [];
 
-  get ordersFormArray() {
+  get bezorgwijzenFormArray() {
     return this.gebruikerForm.controls.bezorgwijzen as FormArray;
   }
   ophalenChecked = false;
@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
   }
 
   private addCheckboxes() {
-    this.bezorgwijzen.forEach(() => this.ordersFormArray.push(new FormControl(false)));
+    this.bezorgwijzen.forEach(() => this.bezorgwijzenFormArray.push(new FormControl(false)));
   }
 
   getBezorgwijzen() {

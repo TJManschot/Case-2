@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AdvertentieModel} from '../../models/advertentie.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AdvertentieService} from '../../services/advertentie/advertentie.service';
-import {Soort} from '../../models/soort';
 import {Hoofdcategorie} from '../../models/hoofdcategorie';
 import {Categorie} from '../../models/categorie';
 
@@ -18,15 +17,14 @@ export class AdvertentieFormComponent implements OnInit {
   soorten: string[];
   hoofdcategorieen: Hoofdcategorie[];
   categorieen: Categorie[];
-  soortTekst = 'Soort';
-  hoofdcategorieTekst = 'Hoofdcategorie';
-  categorieTekst = 'Categorie';
 
   constructor( private fb: FormBuilder,
                private ad: AdvertentieService) { }
 
   ngOnInit(): void {
-    this.ad.soorten$.subscribe(soorten => this.soorten = soorten);
+    this.ad.soorten$.subscribe(soorten => {
+      this.soorten = soorten;
+    });
     this.ad.hoofdcategorieen$.subscribe(hoofdcategorieen => this.hoofdcategorieen = hoofdcategorieen);
     this.ad.categorieen$.subscribe(categorieen => this.categorieen = categorieen);
 
@@ -36,12 +34,17 @@ export class AdvertentieFormComponent implements OnInit {
       omschrijving: [''],
       prijs: [''],
       soort: [''],
+      hoofdcategorie: [''],
       categorie: [{
         hoofdcategorie: {naam: ''}, naam: '',
       }],
     });
+    this.getSoorten();
+    this.getHoofdcategorieen();
+    this.advertentieForm.controls.hoofdcategorie.valueChanges.subscribe(
+      hoofdcategorie => this.getCategorieen(hoofdcategorie)
+    );
   }
-
   onImageChange(e){
     const reader = new FileReader();
 
@@ -68,21 +71,7 @@ export class AdvertentieFormComponent implements OnInit {
   getHoofdcategorieen(): void {
     this.ad.getHoofdcategorieen();
   }
-  getCategorieen(): void {
-    this.ad.getCategorieen();
-  }
-  kiesSoort(s: string): void {
-    this.soortTekst = s.toString();
-    this.advertentieForm.value.soort = s;
-    console.log('Soort gekozen = ' + s);
-  }
-  kiesHoofdcategorie(h: Hoofdcategorie): void {
-    this.hoofdcategorieTekst = h.naam;
-    this.getCategorieen();
-  }
-  kiesCategorie(c: Categorie): void {
-    this.categorieTekst = c.naam;
-    this.advertentieForm.value.categorie.hoofdcategorie.naam = c.hoofdcategorie.naam;
-    this.advertentieForm.value.categorie.naam = c.naam;
+  getCategorieen(hoofdcategorie: string): void {
+    this.ad.getCategorieen(hoofdcategorie);
   }
 }

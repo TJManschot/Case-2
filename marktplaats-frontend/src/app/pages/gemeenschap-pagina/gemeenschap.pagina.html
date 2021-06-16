@@ -1,8 +1,10 @@
 <table class="table">
   <tr>
     <th>Gebruikersnaam</th>
+    <th>Email-adres</th>
   </tr>
   <tr *ngFor="let gebruiker of gebruikers">
     <td>{{gebruiker.gebruikersnaam}}</td>
+    <td>{{gebruiker.email}}</td>
   </tr>
 </table>

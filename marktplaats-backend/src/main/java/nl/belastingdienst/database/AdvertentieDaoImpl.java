@@ -39,7 +39,9 @@ public class AdvertentieDaoImpl implements AdvertentieDao {
     }
 
     @Override
-    public List<Categorie> getCategorieen() {
-        return em.createQuery("SELECT c FROM Categorie c", Categorie.class).getResultList();
+    public List<Categorie> getCategorieen(String hoofdcategorie) {
+        return em.createQuery("SELECT c FROM Categorie c WHERE c.hoofdcategorie.naam = :h", Categorie.class)
+                .setParameter("h", hoofdcategorie)
+                .getResultList();
     }
 }

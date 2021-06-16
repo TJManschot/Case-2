@@ -4,11 +4,13 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import nl.belastingdienst.database.AdvertentieDao;
 import nl.belastingdienst.model.Advertentie;
+import nl.belastingdienst.model.Hoofdcategorie;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -51,10 +53,10 @@ public class AdvertentieResource implements JsonResource{
     }
 
     @GET @Path("categorieen")
-    public Response getCategorieen() {
+    public Response getCategorieen(@QueryParam("hoofdcategorie") String hoofdcategorie) {
         return Response.status(200)
                 .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(advertentieDao.getCategorieen())
+                .entity(advertentieDao.getCategorieen(hoofdcategorie))
                 .build();
     }
 }

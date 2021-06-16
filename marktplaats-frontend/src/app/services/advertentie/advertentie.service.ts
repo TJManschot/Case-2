@@ -60,8 +60,8 @@ export class AdvertentieService {
         hoofdcategorieen => this._hoofdcategorieen$.next(hoofdcategorieen)
       );
   }
-  getCategorieen(): void {
-    this.http.get<Categorie[]> (this.url + '/categorieen')
+  getCategorieen(hoofdcategorie: string): void {
+    this.http.get<Categorie[]> (this.url + '/categorieen?hoofdcategorie=' + hoofdcategorie)
       .subscribe(
         categorieen => this._categorieen$.next(categorieen)
       );

@@ -12,5 +12,5 @@ public interface AdvertentieDao {
     void add(Advertentie advertentie);
     List<Soort> getSoorten();
     List<Hoofdcategorie> getHoofdcategorieen();
-    List<Categorie> getCategorieen();
+    List<Categorie> getCategorieen(String hoofdcategorie);
 }
