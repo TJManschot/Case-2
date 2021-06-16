@@ -1,10 +1,12 @@
-<table class="table">
+<table class="table table-bordered table-hover">
+  <thead>
   <tr>
     <th>Gebruikersnaam</th>
     <th>Email-adres</th>
-  </tr>
+  </tr></thead><tbody>
   <tr *ngFor="let gebruiker of gebruikers">
     <td>{{gebruiker.gebruikersnaam}}</td>
     <td>{{gebruiker.email}}</td>
   </tr>
+</tbody>
 </table>
