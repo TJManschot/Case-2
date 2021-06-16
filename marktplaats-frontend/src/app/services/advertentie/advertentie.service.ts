@@ -37,14 +37,28 @@ export class AdvertentieService {
     return this._categorieen$;
   }
   getAdvertenties(s?: string, h?: string, c?: string): Subject<AdvertentieModel[]>{
-    let uri: string;
-    if (s === '' || s === 'Alle' || h === '' || h === 'Alle' || c === '' || c === 'Alle') {
-      uri = this.url;
+    let url: string;
+    if (s === undefined || s === '' || s === 'Alle' || h === undefined || h === '' || h === 'Alle' || c === undefined || c === '' || c === 'Alle') {
+      url = this.url;
     } else {
-      uri = this.url + '?soort=' + s + '&hoofdcategorie=' + h + '&categorie=' + c;
-      console.log('Making url for GET request.');
+      url = this.url + '?soort=' + s + '&hoofdcategorie=' + h + '&categorie=' + c;
     }
-    this.http.get<AdvertentieModel[]>(uri)
+    // if (s === '' || s === undefined) {
+    //   url = url + '?soort=' + 'Alle';
+    // } else {
+    //   url = url + '?soort=' + s;
+    // }
+    // if (h === '' || h === undefined) {
+    //   url = url + '&hoofdcategorie=' + 'Alle';
+    // } else {
+    //   url = url + '&hoofdcategorie=' + h;
+    // }
+    // if (c === '' || c === undefined) {
+    //   url = url + '&categorie=' + 'Alle';
+    // } else {
+    //   url = url + '&categorie=' + c;
+    // }
+    this.http.get<AdvertentieModel[]>(url)
       .subscribe(
         ad => this.advertentieSubject.next(ad)
       );

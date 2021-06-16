@@ -22,12 +22,6 @@ export class AdvertentieFormComponent implements OnInit {
                private ad: AdvertentieService) { }
 
   ngOnInit(): void {
-    this.ad.soorten$.subscribe(soorten => {
-      this.soorten = soorten;
-    });
-    this.ad.hoofdcategorieen$.subscribe(hoofdcategorieen => this.hoofdcategorieen = hoofdcategorieen);
-    this.ad.categorieen$.subscribe(categorieen => this.categorieen = categorieen);
-
     this.advertentieForm = this.fb.group({
       titel: [''],
       afbeelding: [''],
@@ -39,6 +33,20 @@ export class AdvertentieFormComponent implements OnInit {
         hoofdcategorie: {naam: ''}, naam: '',
       }],
     });
+    this.ad.soorten$.subscribe(soorten => {
+      if (soorten[0] !== 'Maak een keuze') {
+        soorten.unshift('Maak een keuze');
+      }
+      this.soorten = soorten;
+    });
+    this.ad.hoofdcategorieen$.subscribe(
+      hoofdcategorieen => {
+        if (JSON.stringify(hoofdcategorieen[0]) !== '{"naam":"Maak een keuze"}') {
+          hoofdcategorieen.unshift({naam: 'Maak een keuze'});
+        }
+        this.hoofdcategorieen = hoofdcategorieen;
+      });
+    this.ad.categorieen$.subscribe(categorieen => this.categorieen = categorieen);
     this.getSoorten();
     this.getHoofdcategorieen();
     this.advertentieForm.controls.hoofdcategorie.valueChanges.subscribe(
@@ -64,6 +72,7 @@ export class AdvertentieFormComponent implements OnInit {
 
   addAdvertentie(){
     this.ad.addAdvertentie(this.advertentieForm.value);
+    this.advertentieForm.reset();
   }
   getSoorten(): void {
     this.ad.getSoorten();

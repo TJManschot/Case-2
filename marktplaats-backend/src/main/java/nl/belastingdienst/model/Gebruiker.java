@@ -10,6 +10,7 @@ public class Gebruiker {
     private long id;
     private String gebruikersnaam;
     private String hash;
+    @Transient
     private String tempPassword;
     private String email;
     @Embedded

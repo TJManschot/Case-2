@@ -66,6 +66,7 @@ export class SignupComponent implements OnInit {
   addGebruiker() {
     this.gebruikerService.addGebruiker(this.gebruikerForm.value);
     console.log(this.gebruikerForm.value);
+    this.gebruikerForm.reset();
   }
 
   getWachtwoord(){

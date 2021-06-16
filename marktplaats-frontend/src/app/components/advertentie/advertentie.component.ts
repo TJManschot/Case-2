@@ -29,15 +29,27 @@ export class AdvertentieComponent implements OnInit {
         hoofdcategorie: {naam: ''}, naam: '',
       }],
     });
-    this.ad.soorten$.subscribe(soorten => { soorten.unshift('Alle'); this.soorten = soorten; });
+    this.ad.soorten$.subscribe(soorten => {
+      if (soorten[0] !== 'Maak een keuze') {
+        soorten.unshift('Maak een keuze');
+      }
+      this.soorten = soorten;
+    });
     this.ad.hoofdcategorieen$.subscribe(
-      hoofdcategorieen => { hoofdcategorieen.unshift({naam: 'Alle'}); this.hoofdcategorieen = hoofdcategorieen; }
+      hoofdcategorieen => {
+        if (JSON.stringify(hoofdcategorieen[0]) !== '{"naam":"Maak een keuze"}') {
+          hoofdcategorieen.unshift({naam: 'Maak een keuze'});
+        }
+        this.hoofdcategorieen = hoofdcategorieen; }
     );
     this.ad.categorieen$.subscribe(
-      categorieen => { categorieen.unshift({hoofdcategorie: {naam: ''}, naam: 'Alle'}); this.categorieen = categorieen;}
+      categorieen => {
+        if (JSON.stringify(categorieen[0]) !== '{"hoofdcategorie":{"naam":""},"naam":"Maak een keuze"}') {
+          categorieen.unshift({hoofdcategorie: {naam: ''}, naam: 'Maak een keuze'});
+        }
+        this.categorieen = categorieen; }
     );
     this.getAdvertenties();
-
     this.getSoorten();
     this.getHoofdcategorieen();
     this.keuzeForm.controls.hoofdcategorie.valueChanges.subscribe(
@@ -49,8 +61,9 @@ export class AdvertentieComponent implements OnInit {
 
   getAdvertenties() {
     console.log(
-      this.keuzeForm.value.soort +
-      this.keuzeForm.value.categorie.hoofdcategorie.naam +
+      'Request with parameters ' +
+      this.keuzeForm.value.soort + ' ' +
+      this.keuzeForm.value.categorie.hoofdcategorie.naam + ' ' +
       this.keuzeForm.value.categorie.naam);
     this.ad.getAdvertenties(
       this.keuzeForm.value.soort,
