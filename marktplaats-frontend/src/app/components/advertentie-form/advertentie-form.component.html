@@ -27,15 +27,15 @@
           </option>
         </select>
       </div>
-      <div>
-        <label class="control-label">Hoofdcategorie</label>
-        <select class="form-control" formControlName="hoofdcategorie">
-          <option *ngFor="let h of hoofdcategorieen">
+      <div class="margin-left">
+        <label class="control-label" for="hoofdcategorie">Hoofdcategorie</label>
+        <select class="form-control" formControlName="hoofdcategorie" id="hoofdcategorie">
+          <option class="" *ngFor="let h of hoofdcategorieen">
             {{h.naam}}
           </option>
         </select>
       </div>
-      <div>
+      <div class="margin-left">
         <label class="control-label">Categorie</label>
         <select class="form-control" formControlName="categorie">
           <option *ngFor="let c of categorieen" [ngValue]="c">

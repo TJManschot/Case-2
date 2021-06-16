@@ -3,9 +3,8 @@ import {Gebruiker} from '../../models/gebruiker';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {GebruikerService} from '../../services/gebruiker/gebruiker.service';
 import {Bezorgwijzen} from '../../models/bezorgwijzen';
-import {ModalDismissReasons, NgbActiveModal, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {delay} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-signup',
