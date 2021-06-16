@@ -10,7 +10,9 @@ import javax.ws.rs.core.Response;
 
 import nl.belastingdienst.database.AdvertentieDao;
 import nl.belastingdienst.model.Advertentie;
+import nl.belastingdienst.model.Categorie;
 import nl.belastingdienst.model.Hoofdcategorie;
+import nl.belastingdienst.model.Soort;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -23,10 +25,29 @@ public class AdvertentieResource implements JsonResource{
     @Inject
     AdvertentieDao advertentieDao;
 
+//    @GET
+//    public List<Advertentie> get(){
+//        log.info("Advertenties worden opgehaald ...");
+//        return advertentieDao.get();
+//    }
+
     @GET
-    public List<Advertentie> get(){
-        log.info("Advertenties worden opgehaald ...");
-        return advertentieDao.get();
+    public List<Advertentie> get(
+            @QueryParam("soort") String s,
+            @QueryParam("hoofdcategorie") String h,
+            @QueryParam("categorie") String c) {
+        if (s != null && h != null && c != null) {
+            log.info("Advertenties worden opgehaald met " + s + " " + h + " " + c);
+            Soort soort = Soort.valueOf(s);
+            Hoofdcategorie hoofdcategorie = new Hoofdcategorie();
+            hoofdcategorie.setNaam(h);
+            Categorie categorie = new Categorie();
+            categorie.setHoofdcategorie(hoofdcategorie);
+            categorie.setNaam(c);
+            return advertentieDao.get(soort, categorie);
+        } else {
+            return advertentieDao.get();
+        }
     }
 
     @POST

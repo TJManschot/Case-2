@@ -36,13 +36,19 @@ export class AdvertentieService {
   get categorieen$(): Subject<Categorie[]> {
     return this._categorieen$;
   }
-
-  getAdvertenties(): Subject<AdvertentieModel[]>{
-     this.http.get<AdvertentieModel[]>(this.url)
+  getAdvertenties(s?: string, h?: string, c?: string): Subject<AdvertentieModel[]>{
+    let uri: string;
+    if (s === '' || s === 'Alle' || h === '' || h === 'Alle' || c === '' || c === 'Alle') {
+      uri = this.url;
+    } else {
+      uri = this.url + '?soort=' + s + '&hoofdcategorie=' + h + '&categorie=' + c;
+      console.log('Making url for GET request.');
+    }
+    this.http.get<AdvertentieModel[]>(uri)
       .subscribe(
         ad => this.advertentieSubject.next(ad)
       );
-     return this.advertentieSubject;
+    return this.advertentieSubject;
   }
 
   addAdvertentie(advertentie: AdvertentieModel){

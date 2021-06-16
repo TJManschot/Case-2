@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface AdvertentieDao {
     List<Advertentie> get();
+    List<Advertentie> get(Soort soort, Categorie categorie);
     void add(Advertentie advertentie);
     List<Soort> getSoorten();
     List<Hoofdcategorie> getHoofdcategorieen();

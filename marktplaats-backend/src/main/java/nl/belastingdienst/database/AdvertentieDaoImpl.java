@@ -24,6 +24,15 @@ public class AdvertentieDaoImpl implements AdvertentieDao {
     }
 
     @Override
+    public List<Advertentie> get(Soort s, Categorie c){
+        return em
+                .createQuery("select ad from Advertentie ad WHERE ad.soort = :s AND ad.categorie = :c", Advertentie.class)
+                .setParameter("s", s)
+                .setParameter("c", c)
+                .getResultList();
+    }
+
+    @Override
     public void add(Advertentie advertentie) {
         em.persist(advertentie);
     }

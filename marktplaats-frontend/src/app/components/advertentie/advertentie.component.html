@@ -1,3 +1,35 @@
+<form (submit)="getAdvertenties()" [formGroup]="keuzeForm">
+<div class="btn-group mr-3 margin-top">
+  <div>
+    <label class="control-label">Soort</label>
+    <select class="form-control" formControlName="soort">
+      <option *ngFor="let s of soorten">
+        {{s}}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label class="control-label">Hoofdcategorie</label>
+    <select class="form-control" formControlName="hoofdcategorie">
+      <option *ngFor="let h of hoofdcategorieen">
+        {{h.naam}}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label class="control-label">Categorie</label>
+    <select class="form-control" formControlName="categorie">
+      <option *ngFor="let c of categorieen" [ngValue]="c">
+        {{c.naam}}
+      </option>
+    </select>
+  </div>
+  <button type="submit">Zoek</button>
+</div>
+</form>
+
+{{keuzeForm.value | json}}
+
 <div class="row row-cols-auto margin-top">
   <div *ngFor="let ad of advertenties" class="col w-25 h-auto margin-top ">
     <div class="card-header">
