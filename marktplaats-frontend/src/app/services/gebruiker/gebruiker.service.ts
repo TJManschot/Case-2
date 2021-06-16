@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Gebruiker} from '../../models/gebruiker';
 import {Bezorgwijzen} from '../../models/bezorgwijzen';
-import {Observable, Subject} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, ReplaySubject, Subject, Subscription} from 'rxjs';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,13 +17,25 @@ export class GebruikerService {
   private url = 'http://localhost:9080/marktplaats/api/gebruikers';
   // tslint:disable-next-line:variable-name
   private _gebruikers$ = new Subject<Gebruiker[]>();
+  // tslint:disable-next-line:variable-name
+  private _tempWachtwoord$: string;
 
   constructor(private http: HttpClient) { }
 
   addGebruiker(nieuweGebruiker: Gebruiker){
     nieuweGebruiker = this.bezorgwijzenFix(nieuweGebruiker);
-    this.http.post<Gebruiker>(this.url, nieuweGebruiker, httpOptions).subscribe();
+    this.http.post<Gebruiker>(this.url, nieuweGebruiker, {observe: 'response'}).subscribe(response => this.saveTempPassword(response));
     // () => this.getGebruikers()
+  }
+
+  saveTempPassword(response: HttpResponse<Gebruiker>){
+    const gebruikerResponse = response.body;
+    console.log('tempWachtwoord is:' + gebruikerResponse.tempPassword);
+    this._tempWachtwoord$ = (gebruikerResponse.tempPassword);
+  }
+
+  get tempWachtwoord(){
+    return this._tempWachtwoord$;
   }
 
   patchGebruiker(updateGebruiker: Gebruiker, gebruikersnaam: string){
