@@ -27,13 +27,6 @@ public class GebruikerDaoImpl implements GebruikerDao {
                 .getResultList();
     }
 
-//    @Override
-//    public Gebruiker getGebruiker(String gebruikersnaam){
-//        return em.createQuery("select g from Gebruiker g  where g.gebruikersnaam =:input", Gebruiker.class)
-//                .setParameter("input", gebruikersnaam)
-//                .getSingleResult();
-//    }
-
     public void patch(Gebruiker gebruiker){
         em.merge(gebruiker);
     }

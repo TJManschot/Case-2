@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {InlogService} from '../../services/inlog/inlog.service';
 import {Gebruiker} from '../../models/gebruiker';
 import {GebruikerService} from '../../services/gebruiker/gebruiker.service';
@@ -22,8 +22,8 @@ export class GegevensFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.gebruikerForm = this.fb.group({
-      gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
-      email: ['', [Validators.required]],
+      gebruikersnaam: [''],
+      email: ['', [Validators.email]],
       tempPassword: ['']
     });
   }

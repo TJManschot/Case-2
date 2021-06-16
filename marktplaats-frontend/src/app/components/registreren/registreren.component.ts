@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Gebruiker} from '../../models/gebruiker';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {GebruikerService} from '../../services/gebruiker/gebruiker.service';
 import {Bezorgwijzen} from '../../models/bezorgwijzen';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-signup',
@@ -26,7 +27,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private gebruikerService: GebruikerService
+    private gebruikerService: GebruikerService,
+    private modalService: NgbModal
   ) {}
 
 
@@ -39,8 +41,8 @@ export class SignupComponent implements OnInit {
       stad: ['']
     });
     this.gebruikerForm = this.fb.group({
-      gebruikersnaam: ['', [Validators.required, Validators.pattern('^[a-zA-Z -]+$')]],
-      email: ['', [Validators.required, emailValidator]],
+      gebruikersnaam: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       adres: this.adresForm,
       bezorgwijzen: new FormArray([])
     });
@@ -57,7 +59,6 @@ export class SignupComponent implements OnInit {
     return Object.values(Bezorgwijzen);
   }
 
-
   updateState() {
     this.ophalenChecked = !this.ophalenChecked;
   }
@@ -67,17 +68,14 @@ export class SignupComponent implements OnInit {
     console.log(this.gebruikerForm.value);
   }
 
-}
-
-
-
-
-function emailValidator(control: AbstractControl) {
-  if (!control.value) {
-    return null;
+  getWachtwoord(){
+    return this.gebruikerService.tempWachtwoord;
   }
-  const regex = /^.+@.+\.[a-zA-Z]+$/;
-  return regex.test(control.value) ? null : {email: {valid: false}};
+  open(content) {
+    this.modalService.open(content);
+  }
+
 }
+
 
 
