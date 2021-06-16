@@ -8,7 +8,7 @@
       </option>
     </select>
   </div>
-  <div>
+  <div class="margin-left">
     <label class="control-label">Hoofdcategorie</label>
     <select class="form-control" formControlName="hoofdcategorie">
       <option *ngFor="let h of hoofdcategorieen">
@@ -16,7 +16,7 @@
       </option>
     </select>
   </div>
-  <div>
+  <div class="margin-left">
     <label class="control-label">Categorie</label>
     <select class="form-control" formControlName="categorie">
       <option *ngFor="let c of categorieen" [ngValue]="c">
@@ -24,9 +24,10 @@
       </option>
     </select>
   </div>
-  <button type="submit">Zoek</button>
 </div>
+
 </form>
+<button class="btn btn-primary margin-top" type="submit">Zoek</button>
 
 <div class="row row-cols-auto margin-top">
   <div *ngFor="let ad of advertenties" class="col w-25 h-auto margin-top ">
