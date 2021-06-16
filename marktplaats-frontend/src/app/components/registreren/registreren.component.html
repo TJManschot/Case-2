@@ -24,13 +24,19 @@
       </div>
     </label>
   </div>
-    <button class="btn btn-primary margin-top" type="submit" [disabled]="gebruikerForm.invalid">Aanmelden</button>
+    <button class="btn btn-primary margin-top" type="submit" [disabled]="gebruikerForm.invalid" (click)="open(content)">Aanmelden</button>
   </form>
 
-<div *ngIf="formSubmitted">
-  Uw tijdelijke wachtwoord is: {{getWachtwoord() | json}}
-</div>
-
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Tijdelijk Wachtwoord</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    </button>
+  </div>
+  <div class="modal-body">
+    Uw tijdelijke wachtwoord is: {{getWachtwoord()}}
+  </div>
+</ng-template>
 
 
 

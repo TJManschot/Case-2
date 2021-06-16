@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Gebruiker} from '../../models/gebruiker';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {GebruikerService} from '../../services/gebruiker/gebruiker.service';
 import {Bezorgwijzen} from '../../models/bezorgwijzen';
-import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbActiveModal, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {delay} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 
@@ -16,8 +16,6 @@ import {Subscription} from 'rxjs';
 export class SignupComponent implements OnInit {
   gebruikers: Gebruiker[] = [];
   bezorgwijzen = [];
-  formSubmitted = false;
-  count = 0;
 
   get bezorgwijzenFormArray() {
     return this.gebruikerForm.controls.bezorgwijzen as FormArray;
@@ -30,7 +28,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private gebruikerService: GebruikerService
+    private gebruikerService: GebruikerService,
+    private modalService: NgbModal
   ) {}
 
 
@@ -68,12 +67,16 @@ export class SignupComponent implements OnInit {
   addGebruiker() {
     this.gebruikerService.addGebruiker(this.gebruikerForm.value);
     console.log(this.gebruikerForm.value);
-    this.formSubmitted = true;
   }
 
   getWachtwoord(){
     return this.gebruikerService.tempWachtwoord;
   }
+  open(content) {
+    this.modalService.open(content);
+  }
+
 }
+
 
 
